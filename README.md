@@ -3,6 +3,7 @@ Fork of Ex-Nihilo from [bitbucket](https://bitbucket.org/RedRockFowl/ex-nihilo/s
 
 
 New Features:
+* Add support for 3x3 sieving, inspired from 1.12+ versions
 * Completely Re-worked Sieve, inspired by the 1.12 version Ex-Nihilo Creatio.
     * Support for operating multiple sieves at once, with a configurable radius
     * Support for multiple mesh types, meaning you can remove meshes and put different types in, and have different rewards for different mesh types, this also has a re-worked NEI integration to support it.
