@@ -13,3 +13,22 @@ New Features:
     * Previously only had wood and bone crooks
 * Re-worked config to be more modular and expandable for future features
 * Lots of general refactors for future development
+
+## Using Ex-Nihilo as a dependency
+
+NTNH releases are published to the [NTNH Maven repository](https://maven.ntnewhorizons.com/releases/).
+
+```groovy
+repositories {
+    maven {
+        name = "NTNH Releases"
+        url = "https://maven.ntnewhorizons.com/releases/"
+    }
+}
+
+dependencies {
+    def exNihiloVersion = "1.41_NTNH" // Change this value according to the release you wish to use
+    implementation "exnihilo:ExNihilo:${exNihiloVersion}:dev"
+    compileOnly "exnihilo:ExNihilo:${exNihiloVersion}:sources"
+}
+```

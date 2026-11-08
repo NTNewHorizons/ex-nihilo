@@ -1,0 +1,6 @@
+// Keep dependency coordinates stable regardless of the checkout directory name.
+afterEvaluate {
+    publishing.publications.named('maven', MavenPublication) {
+        artifactId = System.getenv('ARTIFACT_ID') ?: 'ExNihilo'
+    }
+}
