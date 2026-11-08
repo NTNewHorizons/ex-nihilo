@@ -1,12 +1,12 @@
 package exnihilo.registries;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
 import exnihilo.api.items.IMesh;
 import exnihilo.api.registries.IMeshRegistry;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MeshRegistry implements IMeshRegistry {
 
@@ -36,13 +36,14 @@ public class MeshRegistry implements IMeshRegistry {
      * If no mod id can be determined, exnihilo will be assumed.
      * The prefix is separated with a colon.
      *
-     * @param id id to prefix and register under
+     * @param id   id to prefix and register under
      * @param mesh the mesh to register
      */
     @Override
     public void register(String id, IMesh mesh) {
         String prefix;
-        ModContainer mc = Loader.instance().activeModContainer();
+        ModContainer mc = Loader.instance()
+            .activeModContainer();
         if (mc != null) {
             prefix = mc.getModId();
         } else {

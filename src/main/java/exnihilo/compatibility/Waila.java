@@ -33,13 +33,13 @@ public class Waila implements IWailaDataProvider {
 
     @Override
     public List<String> getWailaHead(ItemStack stack, List<String> currentTip, IWailaDataAccessor accessor,
-            IWailaConfigHandler config) {
+        IWailaConfigHandler config) {
         return currentTip;
     }
 
     @Override
     public List<String> getWailaBody(ItemStack stack, List<String> currentTip, IWailaDataAccessor accessor,
-            IWailaConfigHandler config) {
+        IWailaConfigHandler config) {
         if (accessor.getBlock() instanceof BlockBarrel) {
             TileEntityBarrel teBarrel = (TileEntityBarrel) accessor.getTileEntity();
             currentTip.add(getBarrelDisplay(teBarrel.getMode(), teBarrel));
@@ -60,7 +60,7 @@ public class Waila implements IWailaDataProvider {
 
     @Override
     public List<String> getWailaTail(ItemStack stack, List<String> currentTip, IWailaDataAccessor accessor,
-            IWailaConfigHandler config) {
+        IWailaConfigHandler config) {
         return currentTip;
     }
 
@@ -71,8 +71,10 @@ public class Waila implements IWailaDataProvider {
                 return "Empty";
             }
             case FLUID -> {
-                if (barrel.isFull()) return barrel.fluid.getFluid().getName();
-                return barrel.fluid.getFluid().getName() + " " + format.format((barrel.getVolume() * 100.0F)) + "%";
+                if (barrel.isFull()) return barrel.fluid.getFluid()
+                    .getName();
+                return barrel.fluid.getFluid()
+                    .getName() + " " + format.format((barrel.getVolume() * 100.0F)) + "%";
             }
             case COMPOST -> {
                 if (barrel.isFull()) return "Composting: " + Math.round(getBarrelTimeRemaining(barrel)) + "%";
@@ -166,7 +168,7 @@ public class Waila implements IWailaDataProvider {
 
     @Override
     public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x,
-            int y, int z) {
+        int y, int z) {
         ExNihilo.log.info("Waila getNBTData called");
         return tag;
     }

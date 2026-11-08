@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 public class ModelCrucible extends ModelBase {
 
     public static final ResourceLocation[] textures = new ResourceLocation[] {
-            new ResourceLocation("exnihilo", "textures/blocks/ModelCrucible.png") };
+        new ResourceLocation("exnihilo", "textures/blocks/ModelCrucible.png") };
 
     final ModelRenderer Bottom3;
 

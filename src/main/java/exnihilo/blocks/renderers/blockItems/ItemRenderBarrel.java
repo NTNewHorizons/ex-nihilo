@@ -27,7 +27,7 @@ public class ItemRenderBarrel implements IItemRenderer {
 
     @Override
     public boolean shouldUseRenderHelper(IItemRenderer.ItemRenderType type, ItemStack item,
-            IItemRenderer.ItemRendererHelper helper) {
+        IItemRenderer.ItemRendererHelper helper) {
         return Objects.requireNonNull(type) != ItemRenderType.FIRST_PERSON_MAP;
     }
 
@@ -47,7 +47,8 @@ public class ItemRenderBarrel implements IItemRenderer {
     }
 
     protected void bindTexture(Block block, int meta) {
-        TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
+        TextureManager texturemanager = Minecraft.getMinecraft()
+            .getTextureManager();
         if (texturemanager != null) if (meta >= 0) texturemanager.bindTexture(this.model.getBarrelTexture(block, meta));
     }
 }

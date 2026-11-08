@@ -75,7 +75,7 @@ public class ModelBlock extends ModelBase {
     }
 
     public void DrawBottom(Tessellator tessellator, double minU, double maxU, double minV, double maxV,
-            int brightness) {
+        int brightness) {
         tessellator.setBrightness(brightness);
         tessellator.addVertexWithUV(0.0D, 0.0D, 1.0D, minU, maxV);
         tessellator.addVertexWithUV(0.0D, 0.0D, 0.0D, minU, minV);

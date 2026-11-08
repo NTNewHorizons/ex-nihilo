@@ -2,8 +2,6 @@ package exnihilo.blocks.tileentities;
 
 import java.util.ArrayList;
 
-import exnihilo.api.items.IMesh;
-import exnihilo.registries.MeshRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
@@ -14,9 +12,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+import exnihilo.api.items.IMesh;
 import exnihilo.network.ENPacketHandler;
 import exnihilo.network.MessageSieve;
 import exnihilo.network.VanillaPacket;
+import exnihilo.registries.MeshRegistry;
 import exnihilo.registries.SieveRegistry;
 import exnihilo.registries.helpers.SiftingResult;
 import exnihilo.utils.BlockInfo;
@@ -52,15 +52,18 @@ public class TileEntitySieve extends TileEntity {
             meshId = MeshRegistry.INSTANCE.get(this.currentMesh);
         }
         ENPacketHandler.sendToAllAround(
-                new MessageSieve(
-                        this.xCoord,
-                        this.yCoord,
-                        this.zCoord,
-                        this.progress,
-                        meshId,
-                        this.getCurrentStack().getMeta(),
-                        Block.blockRegistry.getNameForObject(this.getCurrentStack().getBlock())),
-                this);
+            new MessageSieve(
+                this.xCoord,
+                this.yCoord,
+                this.zCoord,
+                this.progress,
+                meshId,
+                this.getCurrentStack()
+                    .getMeta(),
+                Block.blockRegistry.getNameForObject(
+                    this.getCurrentStack()
+                        .getBlock())),
+            this);
         VanillaPacket.sendTileEntityUpdate(this);
     }
 
@@ -78,18 +81,18 @@ public class TileEntitySieve extends TileEntity {
 
         if (progress >= 1) {
             ItemInfo itemInfo = new ItemInfo(
-                    Item.getItemFromBlock(this.currentStack.getBlock()),
-                    this.currentStack.getMeta());
+                Item.getItemFromBlock(this.currentStack.getBlock()),
+                this.currentStack.getMeta());
             final ArrayList<SiftingResult> rewards = SieveRegistry.getSiftingOutput(itemInfo, this.currentMesh);
             if (rewards != null && rewards.size() > 0) {
                 for (final SiftingResult reward : rewards) {
                     if (this.worldObj.rand.nextInt(reward.rarity) == 0) {
                         final EntityItem entityitem = new EntityItem(
-                                this.worldObj,
-                                this.xCoord + 0.5D,
-                                this.yCoord + 1.5D,
-                                this.zCoord + 0.5D,
-                                new ItemStack(reward.drop.getItem(), 1, reward.drop.getMeta()));
+                            this.worldObj,
+                            this.xCoord + 0.5D,
+                            this.yCoord + 1.5D,
+                            this.zCoord + 0.5D,
+                            new ItemStack(reward.drop.getItem(), 1, reward.drop.getMeta()));
                         final double f3 = 0.05F;
                         entityitem.motionX = this.worldObj.rand.nextGaussian() * f3;
                         entityitem.motionY = 0.2D;

@@ -7,7 +7,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.Configuration;
 
 import exnihilo.ENBlocks;
 import exnihilo.ENItems;
@@ -36,14 +35,14 @@ public class CrookUtils {
             if (!world.isRemote) {
                 block.dropBlockAsItem(world, X, Y, Z, meta, 0);
                 if (CrookConfig.enableDefaultCrookRewards && world.rand.nextInt(100) == 0) world.spawnEntityInWorld(
-                        new EntityItem(world, X + 0.5D, Y + 0.5D, Z + 0.5D, new ItemStack(ENItems.Silkworm, 1, 0)));
+                    new EntityItem(world, X + 0.5D, Y + 0.5D, Z + 0.5D, new ItemStack(ENItems.Silkworm, 1, 0)));
             }
             validTarget = true;
         }
         if (block == ENBlocks.LeavesInfested) {
             if (!world.isRemote)
                 if (CrookConfig.enableDefaultCrookRewards && world.rand.nextInt(15) == 0) world.spawnEntityInWorld(
-                        new EntityItem(world, X + 0.5D, Y + 0.5D, Z + 0.5D, new ItemStack(ENItems.Silkworm, 1, 0)));
+                    new EntityItem(world, X + 0.5D, Y + 0.5D, Z + 0.5D, new ItemStack(ENItems.Silkworm, 1, 0)));
             validTarget = true;
         }
         return validTarget;

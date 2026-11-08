@@ -48,12 +48,12 @@ public class ClientProxy extends Proxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBarrel.class, new RenderBarrel(barrel));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ENBlocks.Barrel), new ItemRenderBarrel(barrel));
         MinecraftForgeClient
-                .registerItemRenderer(Item.getItemFromBlock(ENBlocks.BarrelStone), new ItemRenderBarrel(barrel));
+            .registerItemRenderer(Item.getItemFromBlock(ENBlocks.BarrelStone), new ItemRenderBarrel(barrel));
 
         ModelBlock block = new ModelBlock();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLeavesInfested.class, new RenderLeaves(block));
         MinecraftForgeClient
-                .registerItemRenderer(Item.getItemFromBlock(ENBlocks.LeavesInfested), new ItemRenderLeaves(block));
+            .registerItemRenderer(Item.getItemFromBlock(ENBlocks.LeavesInfested), new ItemRenderLeaves(block));
 
         ModelSieve sieve = new ModelSieve();
         ModelSieveMesh mesh = new ModelSieveMesh();
@@ -63,14 +63,14 @@ public class ClientProxy extends Proxy {
         ModelCrucible crucible = new ModelCrucible();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrucible.class, new RenderCrucible(crucible));
         MinecraftForgeClient
-                .registerItemRenderer(Item.getItemFromBlock(ENBlocks.Crucible), new ItemRenderCrucible(crucible));
+            .registerItemRenderer(Item.getItemFromBlock(ENBlocks.Crucible), new ItemRenderCrucible(crucible));
 
         ModelCrucibleRaw crucibleRaw = new ModelCrucibleRaw();
         ClientRegistry
-                .bindTileEntitySpecialRenderer(TileEntityCrucibleUnfired.class, new RenderCrucibleUnfired(crucibleRaw));
+            .bindTileEntitySpecialRenderer(TileEntityCrucibleUnfired.class, new RenderCrucibleUnfired(crucibleRaw));
         MinecraftForgeClient.registerItemRenderer(
-                Item.getItemFromBlock(ENBlocks.CrucibleUnfired),
-                new ItemRenderCrucibleUnfired(crucibleRaw));
+            Item.getItemFromBlock(ENBlocks.CrucibleUnfired),
+            new ItemRenderCrucibleUnfired(crucibleRaw));
 
         RenderingRegistry.registerEntityRenderingHandler(EntityStone.class, new RenderSnowball(ENItems.Stones));
     }

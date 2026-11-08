@@ -44,8 +44,8 @@ public class HandlerHammer {
 
     public boolean canHarvest(Block block, int meta, ItemStack stack) {
         int harvestLevel = 0;
-        if (stack.getItem() instanceof ItemTool)
-            harvestLevel = ((ItemTool) stack.getItem()).func_150913_i().getHarvestLevel();
+        if (stack.getItem() instanceof ItemTool) harvestLevel = ((ItemTool) stack.getItem()).func_150913_i()
+            .getHarvestLevel();
         return (block.getHarvestLevel(meta) <= harvestLevel);
     }
 }

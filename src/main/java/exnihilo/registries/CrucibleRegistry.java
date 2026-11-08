@@ -4,7 +4,6 @@ import java.util.Hashtable;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -15,7 +14,7 @@ public class CrucibleRegistry {
     public static final Hashtable<String, Meltable> entries = new Hashtable<>();
 
     public static void register(Block block, int meta, float solidAmount, Fluid fluid, float fluidAmount,
-            Block appearance, int appearanceMeta) {
+        Block appearance, int appearanceMeta) {
         Meltable entry = new Meltable(block, meta, solidAmount, fluid, fluidAmount, appearance, appearanceMeta);
         entries.put(block + ":" + meta, entry);
     }
@@ -25,7 +24,7 @@ public class CrucibleRegistry {
     }
 
     public static void register(Block block, int meta, float solidAmount, Fluid fluid, float fluidAmount,
-            Block appearance) {
+        Block appearance) {
         Meltable entry = new Meltable(block, meta, solidAmount, fluid, fluidAmount, appearance, 0);
         entries.put(block + ":" + meta, entry);
     }

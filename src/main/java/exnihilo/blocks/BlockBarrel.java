@@ -80,18 +80,18 @@ public class BlockBarrel extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
-            float par8, float par9) {
+        float par8, float par9) {
         if (player == null) return false;
         TileEntityBarrel barrel = (TileEntityBarrel) world.getTileEntity(x, y, z);
         if ((barrel.getMode()).canExtract == TileEntityBarrel.ExtractMode.Always
-                || (world.difficultySetting.getDifficultyId() == 0
-                        && (barrel.getMode()).canExtract == TileEntityBarrel.ExtractMode.PeacefulOnly)) {
+            || (world.difficultySetting.getDifficultyId() == 0
+                && (barrel.getMode()).canExtract == TileEntityBarrel.ExtractMode.PeacefulOnly)) {
             barrel.giveAppropriateItem();
         } else if (player.getCurrentEquippedItem() != null) {
             ItemStack item = player.getCurrentEquippedItem();
             if (item != null) {
                 if (BarrelConfig.enableBarrelRecipeDirt) if (barrel.getMode() == TileEntityBarrel.BarrelMode.EMPTY
-                        || (barrel.getMode() == TileEntityBarrel.BarrelMode.COMPOST && !barrel.isFull()))
+                    || (barrel.getMode() == TileEntityBarrel.BarrelMode.COMPOST && !barrel.isFull()))
                     if (CompostRegistry.containsItem(item.getItem(), item.getItemDamage())) {
                         barrel.addCompostItem(CompostRegistry.getItem(item.getItem(), item.getItemDamage()));
                         if (!player.capabilities.isCreativeMode) {
@@ -100,7 +100,7 @@ public class BlockBarrel extends BlockContainer {
                         }
                     }
                 if (barrel.getMode() == TileEntityBarrel.BarrelMode.EMPTY
-                        || barrel.getMode() == TileEntityBarrel.BarrelMode.FLUID) {
+                    || barrel.getMode() == TileEntityBarrel.BarrelMode.FLUID) {
                     FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(item);
                     if (fluid != null) {
                         int capacity = barrel.fill(ForgeDirection.UP, fluid, false);
@@ -109,11 +109,11 @@ public class BlockBarrel extends BlockContainer {
                             if (!player.capabilities.isCreativeMode)
                                 if (item.getItem() == Items.potionitem && item.getItemDamage() == 0) {
                                     player.inventory.setInventorySlotContents(
-                                            player.inventory.currentItem,
-                                            new ItemStack(Items.glass_bottle, 1, 0));
+                                        player.inventory.currentItem,
+                                        new ItemStack(Items.glass_bottle, 1, 0));
                                 } else {
                                     player.inventory
-                                            .setInventorySlotContents(player.inventory.currentItem, getContainer(item));
+                                        .setInventorySlotContents(player.inventory.currentItem, getContainer(item));
                                 }
                         }
                     } else if (FluidContainerRegistry.isContainer(item)) {
@@ -144,7 +144,8 @@ public class BlockBarrel extends BlockContainer {
                     EntityWithItem mob = BarrelRecipeRegistry.getMobOutput(barrel.fluid, item);
                     if (mob != null && barrel.isFull() && barrel.getMode() == TileEntityBarrel.BarrelMode.FLUID) {
                         try {
-                            Constructor<EntityLivingBase> constructor = mob.getEntity().getConstructor(World.class);
+                            Constructor<EntityLivingBase> constructor = mob.getEntity()
+                                .getConstructor(World.class);
                             barrel.entity = constructor.newInstance(barrel.getWorldObj());
                         } catch (Exception ignored) {}
                         barrel.entityParticleName = mob.getParticle();
@@ -153,17 +154,18 @@ public class BlockBarrel extends BlockContainer {
                         useItem(player);
                     }
                     if (barrel.getMode() == TileEntityBarrel.BarrelMode.FLUID && barrel.isFull())
-                        if (barrel.fluid.getFluid().equals(FluidRegistry.WATER)) {
-                            if (BarrelConfig.enableBarrelRecipeSlime && item.getItem() == Items.milk_bucket) {
-                                barrel.setMode(TileEntityBarrel.BarrelMode.MILKED);
-                                useItem(player);
-                            }
-                            if (BarrelConfig.enableBarrelRecipeSoulsand
+                        if (barrel.fluid.getFluid()
+                            .equals(FluidRegistry.WATER)) {
+                                if (BarrelConfig.enableBarrelRecipeSlime && item.getItem() == Items.milk_bucket) {
+                                    barrel.setMode(TileEntityBarrel.BarrelMode.MILKED);
+                                    useItem(player);
+                                }
+                                if (BarrelConfig.enableBarrelRecipeSoulsand
                                     && (item.getItem() == Items.mushroom_stew || item.getItem() == ENItems.Spores)) {
-                                barrel.setMode(TileEntityBarrel.BarrelMode.SPORED);
-                                useItem(player);
+                                    barrel.setMode(TileEntityBarrel.BarrelMode.SPORED);
+                                    useItem(player);
+                                }
                             }
-                        }
                 }
             }
         }
@@ -214,7 +216,10 @@ public class BlockBarrel extends BlockContainer {
 
     private ItemStack getContainer(ItemStack item) {
         if (item.stackSize == 1) {
-            if (item.getItem().hasContainerItem(item)) return item.getItem().getContainerItem(item);
+            if (item.getItem()
+                .hasContainerItem(item))
+                return item.getItem()
+                    .getContainerItem(item);
             return null;
         }
         item.splitStack(1);

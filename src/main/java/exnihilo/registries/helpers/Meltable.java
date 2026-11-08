@@ -21,7 +21,7 @@ public class Meltable {
     public final int appearanceMeta;
 
     public Meltable(Block block, int meta, float solidAmount, Fluid fluid, float fluidAmount, Block appearance,
-            int appearanceMeta) {
+        int appearanceMeta) {
         this.block = block;
         this.meta = meta;
         this.solidVolume = solidAmount;

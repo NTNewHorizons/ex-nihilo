@@ -60,7 +60,7 @@ public class BarrelRecipeRegistry {
     }
 
     public static void addMobRecipe(Fluid fluid, ItemStack inputStack, Class entity, String particleName,
-            ItemStack peacefulDrop) {
+        ItemStack peacefulDrop) {
         mobRecipes.put(new FluidItemCombo(fluid, inputStack), new EntityWithItem(entity, peacefulDrop, particleName));
     }
 
@@ -92,63 +92,63 @@ public class BarrelRecipeRegistry {
         if (BarrelConfig.enableBarrelRecipeNetherrack)
             addFluidItemRecipe(FluidRegistry.LAVA, new ItemStack(Items.redstone), new ItemStack(Blocks.netherrack));
         if (BarrelConfig.enableBarrelRecipeEndStone) addFluidItemRecipe(
-                FluidRegistry.LAVA,
-                new ItemStack(Items.glowstone_dust),
-                new ItemStack(Blocks.end_stone));
+            FluidRegistry.LAVA,
+            new ItemStack(Items.glowstone_dust),
+            new ItemStack(Blocks.end_stone));
         if (BarrelConfig.enableBarrelRecipeSoulsand)
             addFluidItemRecipe(Fluids.fluidWitchWater, new ItemStack(Blocks.sand), new ItemStack(Blocks.soul_sand));
         if (BarrelConfig.enableBarrelRecipeDarkOak) addFluidItemRecipe(
-                Fluids.fluidWitchWater,
-                new ItemStack(Blocks.sapling),
-                new ItemStack(Blocks.sapling, 1, 5),
-                true);
+            Fluids.fluidWitchWater,
+            new ItemStack(Blocks.sapling),
+            new ItemStack(Blocks.sapling, 1, 5),
+            true);
         if (BarrelConfig.enableBarrelRecipeDoubleFlowers) {
             addFluidItemRecipe(
-                    Fluids.fluidWitchWater,
-                    new ItemStack(Blocks.yellow_flower),
-                    new ItemStack(Blocks.double_plant),
-                    true);
+                Fluids.fluidWitchWater,
+                new ItemStack(Blocks.yellow_flower),
+                new ItemStack(Blocks.double_plant),
+                true);
             addFluidItemRecipe(
-                    Fluids.fluidWitchWater,
-                    new ItemStack(Blocks.red_flower, 1, 2),
-                    new ItemStack(Blocks.double_plant, 1, 1),
-                    true);
+                Fluids.fluidWitchWater,
+                new ItemStack(Blocks.red_flower, 1, 2),
+                new ItemStack(Blocks.double_plant, 1, 1),
+                true);
             addFluidItemRecipe(
-                    Fluids.fluidWitchWater,
-                    new ItemStack(Blocks.tallgrass, 1, 1),
-                    new ItemStack(Blocks.double_plant, 1, 2),
-                    true);
+                Fluids.fluidWitchWater,
+                new ItemStack(Blocks.tallgrass, 1, 1),
+                new ItemStack(Blocks.double_plant, 1, 2),
+                true);
             addFluidItemRecipe(
-                    Fluids.fluidWitchWater,
-                    new ItemStack(Blocks.tallgrass, 1, 2),
-                    new ItemStack(Blocks.double_plant, 1, 3),
-                    true);
+                Fluids.fluidWitchWater,
+                new ItemStack(Blocks.tallgrass, 1, 2),
+                new ItemStack(Blocks.double_plant, 1, 3),
+                true);
             addFluidItemRecipe(
-                    Fluids.fluidWitchWater,
-                    new ItemStack(Blocks.red_flower),
-                    new ItemStack(Blocks.double_plant, 1, 4),
-                    true);
+                Fluids.fluidWitchWater,
+                new ItemStack(Blocks.red_flower),
+                new ItemStack(Blocks.double_plant, 1, 4),
+                true);
             addFluidItemRecipe(
-                    Fluids.fluidWitchWater,
-                    new ItemStack(Blocks.red_flower, 1, 3),
-                    new ItemStack(Blocks.double_plant, 1, 5),
-                    true);
+                Fluids.fluidWitchWater,
+                new ItemStack(Blocks.red_flower, 1, 3),
+                new ItemStack(Blocks.double_plant, 1, 5),
+                true);
         }
         addFluidTransformRecipe(FluidRegistry.WATER, Blocks.mycelium, 0, Fluids.fluidWitchWater);
         Fluid seedOil = FluidRegistry.getFluid("seedoil");
         if (seedOil != null)
             addFluidItemRecipe(seedOil, new ItemStack(ENBlocks.BeeTrap), new ItemStack(ENBlocks.BeeTrapTreated));
         if (BarrelConfig.enableBarrelRecipeBlazeRod) addMobRecipe(
-                FluidRegistry.LAVA,
-                new ItemStack(ENItems.DollAngry),
-                EntityBlaze.class,
-                "lava",
-                new ItemStack(Items.blaze_rod));
+            FluidRegistry.LAVA,
+            new ItemStack(ENItems.DollAngry),
+            EntityBlaze.class,
+            "lava",
+            new ItemStack(Items.blaze_rod));
         if (BarrelConfig.enableBarrelRecipeEnderPearl) addMobRecipe(
-                Fluids.fluidWitchWater,
-                new ItemStack(ENItems.DollCreepy),
-                EntityEnderman.class,
-                "portal",
-                new ItemStack(Items.ender_pearl));
+            Fluids.fluidWitchWater,
+            new ItemStack(ENItems.DollCreepy),
+            EntityEnderman.class,
+            "portal",
+            new ItemStack(Items.ender_pearl));
     }
 }

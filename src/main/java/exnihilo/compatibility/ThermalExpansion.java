@@ -19,34 +19,36 @@ public class ThermalExpansion {
     public static void loadCompatibility() {
         if (GeneralConfig.overwriteThermalPulverizerRecipes) {
             overwritePulverizerRecipe(
-                    3200,
-                    new ItemStack(Blocks.cobblestone),
-                    new ItemStack(Blocks.gravel),
-                    new ItemStack(Blocks.sand),
-                    10,
-                    true);
+                3200,
+                new ItemStack(Blocks.cobblestone),
+                new ItemStack(Blocks.gravel),
+                new ItemStack(Blocks.sand),
+                10,
+                true);
             overwritePulverizerRecipe(
-                    3200,
-                    new ItemStack(Blocks.gravel),
-                    new ItemStack(Blocks.sand),
-                    new ItemStack(ENBlocks.Dust),
-                    10,
-                    true);
+                3200,
+                new ItemStack(Blocks.gravel),
+                new ItemStack(Blocks.sand),
+                new ItemStack(ENBlocks.Dust),
+                10,
+                true);
             overwritePulverizerRecipe(
-                    3200,
-                    new ItemStack(Blocks.netherrack),
-                    new ItemStack(ENBlocks.NetherGravel),
-                    OreDictionary.getOres("dustSulfur").get(0),
-                    15,
-                    true);
+                3200,
+                new ItemStack(Blocks.netherrack),
+                new ItemStack(ENBlocks.NetherGravel),
+                OreDictionary.getOres("dustSulfur")
+                    .get(0),
+                15,
+                true);
             ExNihilo.log.info("Pulverizer: overwrote the cobble->sand recipe with cobble->gravel");
             ExNihilo.log.info("Pulverizer: added recipe for gravel->sand");
         }
         ThermalExpansionHelper.addPulverizerRecipe(3200, new ItemStack(Blocks.sand), new ItemStack(ENBlocks.Dust));
         ExNihilo.log.info("Pulverizer: added recipe for sand->dust");
         ThermalExpansionHelper
-                .addPulverizerRecipe(3200, new ItemStack(Blocks.end_stone), new ItemStack(ENBlocks.EnderGravel));
-        Block pyrotheum = FluidRegistry.getFluid("pyrotheum").getBlock();
+            .addPulverizerRecipe(3200, new ItemStack(Blocks.end_stone), new ItemStack(ENBlocks.EnderGravel));
+        Block pyrotheum = FluidRegistry.getFluid("pyrotheum")
+            .getBlock();
         if (pyrotheum != null) {
             if (CrucibleConfig.enableDefaultHeatSources) {
                 HeatRegistry.register(pyrotheum, 0.5F);
@@ -58,7 +60,7 @@ public class ThermalExpansion {
     }
 
     public static void overwritePulverizerRecipe(int energy, ItemStack input, ItemStack primaryOutput,
-            ItemStack secondaryOutput, int secondaryChance, boolean overwrite) {
+        ItemStack secondaryOutput, int secondaryChance, boolean overwrite) {
         ThermalExpansionHelper.removePulverizerRecipe(input);
         ThermalExpansionHelper.addPulverizerRecipe(energy, input, primaryOutput, secondaryOutput, secondaryChance);
     }

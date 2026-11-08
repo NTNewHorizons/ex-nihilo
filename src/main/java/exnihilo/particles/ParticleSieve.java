@@ -12,7 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ParticleSieve extends EntityFX {
 
     public ParticleSieve(World par1World, double par2, double par4, double par6, double par8, double par10,
-            double par12, IIcon icon) {
+        double par12, IIcon icon) {
         super(par1World, par2, par4, par6, par8, par10, par12);
         this.particleRed = this.particleGreen = this.particleBlue = 1.0F;
         setParticleIcon(icon);
@@ -44,7 +44,7 @@ public class ParticleSieve extends EntityFX {
 
     @Override
     public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6,
-            float par7) {
+        float par7) {
         float f6 = (this.particleTextureIndexX + this.particleTextureJitterX / 4.0F) / 16.0F;
         float f7 = f6 + 0.015609375F;
         float f8 = (this.particleTextureIndexY + this.particleTextureJitterY / 4.0F) / 16.0F;
@@ -62,28 +62,28 @@ public class ParticleSieve extends EntityFX {
         float f14 = 1.0F;
         par1Tessellator.setColorOpaque_F(f14 * this.particleRed, f14 * this.particleGreen, f14 * this.particleBlue);
         par1Tessellator.addVertexWithUV(
-                (f11 - par3 * f10 - par6 * f10),
-                (f12 - par4 * f10),
-                (f13 - par5 * f10 - par7 * f10),
-                f6,
-                f9);
+            (f11 - par3 * f10 - par6 * f10),
+            (f12 - par4 * f10),
+            (f13 - par5 * f10 - par7 * f10),
+            f6,
+            f9);
         par1Tessellator.addVertexWithUV(
-                (f11 - par3 * f10 + par6 * f10),
-                (f12 + par4 * f10),
-                (f13 - par5 * f10 + par7 * f10),
-                f6,
-                f8);
+            (f11 - par3 * f10 + par6 * f10),
+            (f12 + par4 * f10),
+            (f13 - par5 * f10 + par7 * f10),
+            f6,
+            f8);
         par1Tessellator.addVertexWithUV(
-                (f11 + par3 * f10 + par6 * f10),
-                (f12 + par4 * f10),
-                (f13 + par5 * f10 + par7 * f10),
-                f7,
-                f8);
+            (f11 + par3 * f10 + par6 * f10),
+            (f12 + par4 * f10),
+            (f13 + par5 * f10 + par7 * f10),
+            f7,
+            f8);
         par1Tessellator.addVertexWithUV(
-                (f11 + par3 * f10 - par6 * f10),
-                (f12 - par4 * f10),
-                (f13 + par5 * f10 - par7 * f10),
-                f7,
-                f9);
+            (f11 + par3 * f10 - par6 * f10),
+            (f12 - par4 * f10),
+            (f13 + par5 * f10 - par7 * f10),
+            f7,
+            f9);
     }
 }

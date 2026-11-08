@@ -108,14 +108,15 @@ public class RenderBarrel extends TileEntitySpecialRenderer {
                     icon = barrel.block.getIcon(0, barrel.blockMeta);
                 case RECIPE:
                     if (BarrelRecipeRegistry.getShouldRenderOverride(barrel.outputStack)
-                            || barrel.outputStack == null) {
+                        || barrel.outputStack == null) {
                         color = new Color(content.getColor());
                         transparency = false;
                         icon = content.getIcon();
                         break;
                     }
                     if (Block.getBlockFromItem(barrel.outputStack.getItem()) != null) {
-                        icon = barrel.outputStack.getItem().getIcon(barrel.outputStack, 0);
+                        icon = barrel.outputStack.getItem()
+                            .getIcon(barrel.outputStack, 0);
                         break;
                     }
                     color = new Color(content.getColor());

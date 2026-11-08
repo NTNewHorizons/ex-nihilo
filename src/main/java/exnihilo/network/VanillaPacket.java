@@ -13,8 +13,7 @@ public class VanillaPacket {
         for (Object obj : playerList) {
             EntityPlayerMP entityPlayer = (EntityPlayerMP) obj;
             if (Math.hypot(entityPlayer.posX - tileEntity.xCoord + 0.5D, entityPlayer.posZ - tileEntity.zCoord + 0.5D)
-                    < 64.0D)
-                entityPlayer.playerNetServerHandler.sendPacket(tileEntity.getDescriptionPacket());
+                < 64.0D) entityPlayer.playerNetServerHandler.sendPacket(tileEntity.getDescriptionPacket());
         }
     }
 }

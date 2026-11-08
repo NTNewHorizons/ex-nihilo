@@ -64,6 +64,6 @@ public class ImageManipulator {
 
     private static boolean normalCompositePossible(BufferedImage imgBackground, BufferedImage imgForeground) {
         return (imgBackground.getWidth() == imgForeground.getWidth()
-                && imgBackground.getHeight() == imgForeground.getHeight());
+            && imgBackground.getHeight() == imgForeground.getHeight());
     }
 }

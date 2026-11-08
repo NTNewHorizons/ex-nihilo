@@ -92,18 +92,16 @@ public class IC2 {
                 ExNihilo.log.error("DEFAULT GRAVEL TO FLINT MACERATOR RECIPE WASN'T REMOVED");
             }
             Recipes.macerator.addRecipe(
-                    new RecipeInputItemStack(new ItemStack(Blocks.cobblestone)),
-                    null,
-                    new ItemStack(Blocks.gravel));
+                new RecipeInputItemStack(new ItemStack(Blocks.cobblestone)),
+                null,
+                new ItemStack(Blocks.gravel));
             ExNihilo.log.info("Macerator: added recipe for cobble->gravel");
-            Recipes.macerator.addRecipe(
-                    new RecipeInputItemStack(new ItemStack(Blocks.gravel)),
-                    null,
-                    new ItemStack(Blocks.sand));
+            Recipes.macerator
+                .addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.gravel)), null, new ItemStack(Blocks.sand));
             ExNihilo.log.info("Macerator: added recipe for gravel->sand");
         }
         Recipes.macerator
-                .addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.sand)), null, new ItemStack(ENBlocks.Dust));
+            .addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.sand)), null, new ItemStack(ENBlocks.Dust));
         ExNihilo.log.info("Macerator: added recipe sand->dust");
         ExNihilo.log.info("--- IC2 Integration Complete!");
     }

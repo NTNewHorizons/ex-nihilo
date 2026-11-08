@@ -25,13 +25,13 @@ public class ENPacketHandler {
 
     public static void sendToAllAround(IMessage message, TileEntity te, int range) {
         INSTANCE.sendToAllAround(
-                message,
-                new NetworkRegistry.TargetPoint(
-                        (te.getWorldObj()).provider.dimensionId,
-                        te.xCoord,
-                        te.yCoord,
-                        te.zCoord,
-                        range));
+            message,
+            new NetworkRegistry.TargetPoint(
+                (te.getWorldObj()).provider.dimensionId,
+                te.xCoord,
+                te.yCoord,
+                te.zCoord,
+                range));
     }
 
     public static void sendToAllAround(IMessage message, TileEntity te) {

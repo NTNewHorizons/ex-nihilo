@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import exnihilo.config.HammerConfig;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import exnihilo.ENBlocks;
 import exnihilo.ENItems;
+import exnihilo.config.HammerConfig;
 import exnihilo.registries.helpers.Smashable;
 import exnihilo.utils.ItemInfo;
 
@@ -31,7 +30,7 @@ public class HammerRegistry {
     public static final String categorySmashableOptions = "smashables";
 
     public static void register(Block source, int sourceMeta, Item output, int outputMeta, float chance,
-            float luckMultiplier) {
+        float luckMultiplier) {
         ArrayList<Smashable> current;
         Smashable entry = new Smashable(source, sourceMeta, output, outputMeta, chance, luckMultiplier);
         ItemInfo ii = new ItemInfo(source, sourceMeta);
@@ -93,21 +92,21 @@ public class HammerRegistry {
             register(Blocks.ice, 0, ENItems.IceShard, 0, 0.25F, 0.1F);
             register(Blocks.ice, 0, ENItems.IceShard, 0, 0.05F, 0.1F);
             GameRegistry.addRecipe(
-                    new ShapedOreRecipe(
-                            new ItemStack(Blocks.packed_ice),
-                            new Object[] { "a a", " b ", "a a", 'a', new ItemStack(ENItems.IceShard), 'b',
-                                    new ItemStack(Blocks.sand) }));
+                new ShapedOreRecipe(
+                    new ItemStack(Blocks.packed_ice),
+                    new Object[] { "a a", " b ", "a a", 'a', new ItemStack(ENItems.IceShard), 'b',
+                        new ItemStack(Blocks.sand) }));
             GameRegistry.addRecipe(
-                    new ShapedOreRecipe(
-                            new ItemStack(Blocks.ice),
-                            new Object[] { "aa", "aa", 'a', new ItemStack(ENItems.IceShard) }));
+                new ShapedOreRecipe(
+                    new ItemStack(Blocks.ice),
+                    new Object[] { "aa", "aa", 'a', new ItemStack(ENItems.IceShard) }));
         }
     }
 
     public static boolean registeredInefficiently(Block block, int meta) {
         for (Smashable reward : rewards.get(new ItemInfo(block, meta))) {
-            if (reward.source.getUnlocalizedName().equals(block.getUnlocalizedName()) && reward.meta == meta)
-                return true;
+            if (reward.source.getUnlocalizedName()
+                .equals(block.getUnlocalizedName()) && reward.meta == meta) return true;
         }
         return false;
     }

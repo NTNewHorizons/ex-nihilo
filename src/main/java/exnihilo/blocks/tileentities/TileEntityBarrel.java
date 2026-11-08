@@ -187,9 +187,9 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
         switch (getMode()) {
             case EMPTY -> {
                 if (!this.worldObj.isRemote && this.worldObj.isRaining()
-                        && this.yCoord >= this.worldObj.getTopSolidOrLiquidBlock(this.xCoord, this.zCoord) - 1
-                        && (this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord)).rainfall > 0.0F
-                        && BarrelConfig.enableBarrelRainFill) {
+                    && this.yCoord >= this.worldObj.getTopSolidOrLiquidBlock(this.xCoord, this.zCoord) - 1
+                    && (this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord)).rainfall > 0.0F
+                    && BarrelConfig.enableBarrelRainFill) {
                     this.fluid = new FluidStack(FluidRegistry.WATER, 0);
                     setMode(BarrelMode.FLUID);
                 }
@@ -201,9 +201,9 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                         for (ItemInfo next : getNearbyBlocks()) {
                             if (Block.getBlockFromItem(next.getItem()) != Blocks.air) {
                                 Fluid potentialFluid = BarrelRecipeRegistry.getFluidTransformRecipeOutput(
-                                        this.fluid.getFluid(),
-                                        Block.getBlockFromItem(next.getItem()),
-                                        next.getMeta());
+                                    this.fluid.getFluid(),
+                                    Block.getBlockFromItem(next.getItem()),
+                                    next.getMeta());
                                 if (potentialFluid != null) {
                                     this.transformFluid = potentialFluid;
                                     this.transformBlock = Block.getBlockFromItem(next.getItem());
@@ -217,36 +217,39 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                 }
                 if (this.fluid.getFluidID() == FluidRegistry.WATER.getID()) {
                     if (!this.worldObj.isRemote && !isFull()
-                            && this.worldObj.isRaining()
-                            && this.yCoord >= this.worldObj.getTopSolidOrLiquidBlock(this.xCoord, this.zCoord) - 1
-                            && (this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord)).rainfall > 0.0F
-                            && BarrelConfig.enableBarrelRainFill) {
+                        && this.worldObj.isRaining()
+                        && this.yCoord >= this.worldObj.getTopSolidOrLiquidBlock(this.xCoord, this.zCoord) - 1
+                        && (this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord)).rainfall > 0.0F
+                        && BarrelConfig.enableBarrelRainFill) {
                         this.volume += (this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord)).rainfall
-                                / 1000.0F;
+                            / 1000.0F;
                         if (this.volume > 1.0F) this.volume = 1.0F;
                         this.fluid.amount = (int) (1000.0F * this.volume);
                         this.needsUpdate = true;
                     }
                     if (!this.worldObj.isRemote && isFull()
-                            && BarrelConfig.enableBarrelRecipeSoulsand
-                            && getNearbyBlocks(Blocks.mycelium, 0) > 0) {
-                        this.colorBase = new Color(this.fluid.getFluid().getColor());
+                        && BarrelConfig.enableBarrelRecipeSoulsand
+                        && getNearbyBlocks(Blocks.mycelium, 0) > 0) {
+                        this.colorBase = new Color(
+                            this.fluid.getFluid()
+                                .getColor());
                         setMode(BarrelMode.SPORED);
                         this.needsUpdate = true;
                     }
                     if (isFull() && this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord)
-                            == FluidRegistry.LAVA.getBlock())
-                        setMode(BarrelMode.COBBLESTONE);
+                        == FluidRegistry.LAVA.getBlock()) setMode(BarrelMode.COBBLESTONE);
                     if (!this.worldObj.isRemote && this.fluid.amount > 0
-                            && this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord).getMaterial().getCanBurn()
-                            && this.worldObj.rand.nextInt(500) == 0) {
+                        && this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord)
+                            .getMaterial()
+                            .getCanBurn()
+                        && this.worldObj.rand.nextInt(500) == 0) {
                         int x = this.xCoord + this.worldObj.rand.nextInt(5) - 2;
                         int y = this.yCoord + this.worldObj.rand.nextInt(4) - 1;
                         int z = this.zCoord + this.worldObj.rand.nextInt(5) - 2;
                         int lightLevel = this.worldObj.getBlockLightValue(x, y + 1, z);
                         if (!this.worldObj.isAirBlock(x, y, z) && this.worldObj.getTopSolidOrLiquidBlock(x, z) > y
-                                && lightLevel >= 9
-                                && lightLevel <= 11) {
+                            && lightLevel >= 9
+                            && lightLevel <= 11) {
                             Block selected = this.worldObj.getBlock(x, y, z);
                             int meta = this.worldObj.getBlockMetadata(x, y, z);
                             if (selected == Blocks.stonebrick && meta == 0) {
@@ -261,24 +264,26 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                     }
                 }
                 if (this.fluid.getFluidID() == FluidRegistry.LAVA.getID()) {
-                    if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord).getMaterial().getCanBurn()) {
+                    if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord)
+                        .getMaterial()
+                        .getCanBurn()) {
                         this.timer++;
                         if (this.timer % 30 == 0) this.worldObj.spawnParticle(
-                                "largesmoke",
-                                this.xCoord + Math.random(),
-                                this.yCoord + 1.2D,
-                                this.zCoord + Math.random(),
-                                0.0D,
-                                0.0D,
-                                0.0D);
+                            "largesmoke",
+                            this.xCoord + Math.random(),
+                            this.yCoord + 1.2D,
+                            this.zCoord + Math.random(),
+                            0.0D,
+                            0.0D,
+                            0.0D);
                         if (this.timer % 5 == 0) this.worldObj.spawnParticle(
-                                "smoke",
-                                this.xCoord + Math.random(),
-                                this.yCoord + 1.2D,
-                                this.zCoord + Math.random(),
-                                0.0D,
-                                0.0D,
-                                0.0D);
+                            "smoke",
+                            this.xCoord + Math.random(),
+                            this.yCoord + 1.2D,
+                            this.zCoord + Math.random(),
+                            0.0D,
+                            0.0D,
+                            0.0D);
                         if (this.timer >= 400) {
                             this.timer = 0;
                             if (this.fluid.amount < 1000) {
@@ -290,8 +295,7 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                         }
                     }
                     if (isFull() && this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord)
-                            == FluidRegistry.WATER.getBlock())
-                        setMode(BarrelMode.OBSIDIAN);
+                        == FluidRegistry.WATER.getBlock()) setMode(BarrelMode.OBSIDIAN);
                 }
             }
             case COMPOST -> {
@@ -340,24 +344,24 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                     for (int y = -1; y <= 1; y++) {
                         for (int z = -2; z <= 2; z++) {
                             if (this.worldObj.getBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z)
-                                    == Blocks.mycelium
-                                    && this.worldObj.isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
-                                    && this.worldObj.rand.nextInt(1500) == 0) {
+                                == Blocks.mycelium
+                                && this.worldObj.isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
+                                && this.worldObj.rand.nextInt(1500) == 0) {
                                 int choice = this.worldObj.rand.nextInt(2);
                                 if (choice == 0) this.worldObj.setBlock(
-                                        this.xCoord + x,
-                                        this.yCoord + y + 1,
-                                        this.zCoord + z,
-                                        Blocks.brown_mushroom,
-                                        0,
-                                        3);
+                                    this.xCoord + x,
+                                    this.yCoord + y + 1,
+                                    this.zCoord + z,
+                                    Blocks.brown_mushroom,
+                                    0,
+                                    3);
                                 if (choice == 1) this.worldObj.setBlock(
-                                        this.xCoord + x,
-                                        this.yCoord + y + 1,
-                                        this.zCoord + z,
-                                        Blocks.red_mushroom,
-                                        0,
-                                        3);
+                                    this.xCoord + x,
+                                    this.yCoord + y + 1,
+                                    this.zCoord + z,
+                                    Blocks.red_mushroom,
+                                    0,
+                                    3);
                             }
                         }
                     }
@@ -371,19 +375,20 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
             }
             case BLAZE_COOKING -> {
                 this.timer++;
-                if (!this.worldObj.isRemote
-                        && this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord).getMaterial().getCanBurn()) {
+                if (!this.worldObj.isRemote && this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord)
+                    .getMaterial()
+                    .getCanBurn()) {
                     this.worldObj.func_147480_a(this.xCoord, this.yCoord, this.zCoord, false);
                     this.worldObj.createExplosion(null, this.xCoord, this.yCoord, this.zCoord, 4.0F, true);
                 }
                 if (this.worldObj.isRemote && this.worldObj.rand.nextInt(20) == 0) this.worldObj.spawnParticle(
-                        "lava",
-                        this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                        (this.yCoord + 1),
-                        this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                        0.0D,
-                        0.0D,
-                        0.0D);
+                    "lava",
+                    this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                    (this.yCoord + 1),
+                    this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                    0.0D,
+                    0.0D,
+                    0.0D);
                 if (this.timer >= 700 && this.worldObj.isAirBlock(this.xCoord, this.yCoord + 1, this.zCoord))
                     this.worldObj.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, Blocks.fire);
                 if (isDone()) {
@@ -393,13 +398,13 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
             }
             case BLAZE -> {
                 if (this.worldObj.isRemote) if (this.worldObj.rand.nextInt(5) == 0) this.worldObj.spawnParticle(
-                        "lava",
-                        this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                        (this.yCoord + 1),
-                        this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                        0.0D,
-                        0.0D,
-                        0.0D);
+                    "lava",
+                    this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                    (this.yCoord + 1),
+                    this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                    0.0D,
+                    0.0D,
+                    0.0D);
                 if (!this.worldObj.isRemote && this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL) {
                     if (isDone()) {
                         this.timer = 0;
@@ -410,21 +415,19 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                         for (int y = -1; y <= 1; y++) {
                             for (int z = -1; z <= 1; z++) {
                                 if ((this.worldObj.isAirBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z)
+                                    || this.worldObj.getBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z)
+                                        == Blocks.fire)
+                                    && (this.worldObj.isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
                                         || this.worldObj.getBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z)
-                                                == Blocks.fire)
-                                        && (this.worldObj
-                                                .isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
-                                                || this.worldObj
-                                                        .getBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z)
-                                                        == Blocks.fire)
-                                        && this.worldObj.rand.nextInt(10) == 0
-                                        && !isDone()) {
+                                            == Blocks.fire)
+                                    && this.worldObj.rand.nextInt(10) == 0
+                                    && !isDone()) {
                                     this.timer = 1000;
                                     EntityBlaze blaze = new EntityBlaze(this.worldObj);
                                     blaze.setPosition(
-                                            (this.xCoord + x) + 0.5D,
-                                            (this.yCoord + y),
-                                            (this.zCoord + z) + 0.5D);
+                                        (this.xCoord + x) + 0.5D,
+                                        (this.yCoord + y),
+                                        (this.zCoord + z) + 0.5D);
                                     this.worldObj.spawnEntityInWorld(blaze);
                                 }
                             }
@@ -439,13 +442,13 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                     float f1 = (this.worldObj.rand.nextFloat() - 0.5F) * 0.2F;
                     float f2 = (this.worldObj.rand.nextFloat() - 0.5F) * 0.2F;
                     this.worldObj.spawnParticle(
-                            "portal",
-                            this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                            (this.yCoord + 1),
-                            this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                            f,
-                            f1,
-                            f2);
+                        "portal",
+                        this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                        (this.yCoord + 1),
+                        this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                        f,
+                        f1,
+                        f2);
                 }
                 if (isDone()) {
                     setMode(BarrelMode.ENDER);
@@ -458,13 +461,13 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                     float f1 = (this.worldObj.rand.nextFloat() - 0.5F) * 0.2F;
                     float f2 = (this.worldObj.rand.nextFloat() - 0.5F) * 0.2F;
                     this.worldObj.spawnParticle(
-                            "portal",
-                            this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                            (this.yCoord + 1),
-                            this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                            f,
-                            f1,
-                            f2);
+                        "portal",
+                        this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                        (this.yCoord + 1),
+                        this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                        f,
+                        f1,
+                        f2);
                 }
                 if (!this.worldObj.isRemote && this.worldObj.difficultySetting.getDifficultyId() > 0) {
                     if (isDone()) {
@@ -476,18 +479,16 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                         for (int y = -1; y <= 1; y++) {
                             for (int z = -1; z <= 1; z++) {
                                 if (this.worldObj.isAirBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z)
-                                        && this.worldObj
-                                                .isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
-                                        && this.worldObj
-                                                .isAirBlock(this.xCoord + x, this.yCoord + y + 2, this.zCoord + z)
-                                        && this.worldObj.rand.nextInt(10) == 0
-                                        && !isDone()) {
+                                    && this.worldObj.isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
+                                    && this.worldObj.isAirBlock(this.xCoord + x, this.yCoord + y + 2, this.zCoord + z)
+                                    && this.worldObj.rand.nextInt(10) == 0
+                                    && !isDone()) {
                                     this.timer = 1000;
                                     EntityEnderman enderman = new EntityEnderman(this.worldObj);
                                     enderman.setPosition(
-                                            (this.xCoord + x) + 0.5D,
-                                            (this.yCoord + y),
-                                            (this.zCoord + z) + 0.5D);
+                                        (this.xCoord + x) + 0.5D,
+                                        (this.yCoord + y),
+                                        (this.zCoord + z) + 0.5D);
                                     this.worldObj.spawnEntityInWorld(enderman);
                                 }
                             }
@@ -501,20 +502,20 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                     float f1 = (this.worldObj.rand.nextFloat() - 0.5F) * 0.2F;
                     float f2 = (this.worldObj.rand.nextFloat() - 0.5F) * 0.2F;
                     this.worldObj.spawnParticle(
-                            this.entityParticleName,
-                            this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                            (this.yCoord + 1),
-                            this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
-                            f,
-                            f1,
-                            f2);
+                        this.entityParticleName,
+                        this.xCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                        (this.yCoord + 1),
+                        this.zCoord + this.worldObj.rand.nextFloat() * 0.6D + 0.2D,
+                        f,
+                        f1,
+                        f2);
                 }
                 if (!this.worldObj.isRemote) {
                     if (!isDone()) {
                         this.timer++;
                         ENPacketHandler.sendToAllAround(
-                                new MessageBarrel(this.xCoord, this.yCoord, this.zCoord, this.timer),
-                                this);
+                            new MessageBarrel(this.xCoord, this.yCoord, this.zCoord, this.timer),
+                            this);
                         break;
                     }
                     if (this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL) {
@@ -522,24 +523,20 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                             for (int y = -1; y <= 1; y++) {
                                 for (int z = -1; z <= 1; z++) {
                                     if (this.worldObj.isAirBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z)
-                                            && this.worldObj
-                                                    .isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
-                                            && this.worldObj
-                                                    .isAirBlock(this.xCoord + x, this.yCoord + y + 2, this.zCoord + z)
-                                            && this.worldObj.rand.nextInt(10) == 0) {
+                                        && this.worldObj
+                                            .isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
+                                        && this.worldObj
+                                            .isAirBlock(this.xCoord + x, this.yCoord + y + 2, this.zCoord + z)
+                                        && this.worldObj.rand.nextInt(10) == 0) {
                                         this.entity.setPosition(
-                                                (this.xCoord + x) + 0.5D,
-                                                (this.yCoord + y),
-                                                (this.zCoord + z) + 0.5D);
+                                            (this.xCoord + x) + 0.5D,
+                                            (this.yCoord + y),
+                                            (this.zCoord + z) + 0.5D);
                                         if (this.worldObj.spawnEntityInWorld(this.entity)) {
                                             this.timer = 0;
                                             ENPacketHandler.sendToAllAround(
-                                                    new MessageBarrel(
-                                                            this.xCoord,
-                                                            this.yCoord,
-                                                            this.zCoord,
-                                                            this.timer),
-                                                    this);
+                                                new MessageBarrel(this.xCoord, this.yCoord, this.zCoord, this.timer),
+                                                this);
                                             resetBarrel();
                                         }
                                     }
@@ -557,8 +554,8 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                     if (isDone()) {
                         this.timer = 0;
                         ENPacketHandler.sendToAllAround(
-                                new MessageBarrel(this.xCoord, this.yCoord, this.zCoord, this.timer),
-                                this);
+                            new MessageBarrel(this.xCoord, this.yCoord, this.zCoord, this.timer),
+                            this);
                         this.fluid = new FluidStack(this.transformFluid, this.fluid.amount);
                         setMode(BarrelMode.FLUID);
                         VanillaPacket.sendTileEntityUpdate(this);
@@ -566,38 +563,39 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                     }
                     int blocks = getNearbyBlocks(this.transformBlock, this.transformMeta);
                     this.timer += 1 + blocks / 2;
-                    ENPacketHandler.sendToAllAround(
-                            new MessageBarrel(this.xCoord, this.yCoord, this.zCoord, this.timer),
-                            this);
+                    ENPacketHandler
+                        .sendToAllAround(new MessageBarrel(this.xCoord, this.yCoord, this.zCoord, this.timer), this);
                     this.color = Color.average(
-                            new Color(this.fluid.getFluid().getColor()),
-                            new Color(this.transformFluid.getColor()),
-                            this.timer / 1000.0F);
-                    if (this.fluid.getFluid().equals(FluidRegistry.WATER)
-                            && this.transformFluid.equals(Fluids.fluidWitchWater))
+                        new Color(
+                            this.fluid.getFluid()
+                                .getColor()),
+                        new Color(this.transformFluid.getColor()),
+                        this.timer / 1000.0F);
+                    if (this.fluid.getFluid()
+                        .equals(FluidRegistry.WATER) && this.transformFluid.equals(Fluids.fluidWitchWater))
                         for (int x = -2; x <= 2; x++) {
                             for (int y = -1; y <= 1; y++) {
                                 for (int z = -2; z <= 2; z++) {
                                     if (this.worldObj.getBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z)
-                                            == Blocks.mycelium
-                                            && this.worldObj
-                                                    .isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
-                                            && this.worldObj.rand.nextInt(1500) == 0) {
+                                        == Blocks.mycelium
+                                        && this.worldObj
+                                            .isAirBlock(this.xCoord + x, this.yCoord + y + 1, this.zCoord + z)
+                                        && this.worldObj.rand.nextInt(1500) == 0) {
                                         int choice = this.worldObj.rand.nextInt(2);
                                         if (choice == 0) this.worldObj.setBlock(
-                                                this.xCoord + x,
-                                                this.yCoord + y + 1,
-                                                this.zCoord + z,
-                                                Blocks.brown_mushroom,
-                                                0,
-                                                3);
+                                            this.xCoord + x,
+                                            this.yCoord + y + 1,
+                                            this.zCoord + z,
+                                            Blocks.brown_mushroom,
+                                            0,
+                                            3);
                                         if (choice == 1) this.worldObj.setBlock(
-                                                this.xCoord + x,
-                                                this.yCoord + y + 1,
-                                                this.zCoord + z,
-                                                Blocks.red_mushroom,
-                                                0,
-                                                3);
+                                            this.xCoord + x,
+                                            this.yCoord + y + 1,
+                                            this.zCoord + z,
+                                            Blocks.red_mushroom,
+                                            0,
+                                            3);
                                     }
                                 }
                             }
@@ -605,9 +603,11 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                     break;
                 }
                 this.color = Color.average(
-                        new Color(this.fluid.getFluid().getColor()),
-                        new Color(this.transformFluid.getColor()),
-                        this.timer / 1000.0F);
+                    new Color(
+                        this.fluid.getFluid()
+                            .getColor()),
+                    new Color(this.transformFluid.getColor()),
+                    this.timer / 1000.0F);
             }
         }
     }
@@ -654,11 +654,11 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
     private void giveItem(ItemStack item) {
         if (!this.worldObj.isRemote && item != null) {
             EntityItem entityitem = new EntityItem(
-                    this.worldObj,
-                    this.xCoord + 0.5D,
-                    this.yCoord + 1.5D,
-                    this.zCoord + 0.5D,
-                    item);
+                this.worldObj,
+                this.xCoord + 0.5D,
+                this.yCoord + 1.5D,
+                this.zCoord + 0.5D,
+                item);
             double f3 = 0.05000000074505806D;
             entityitem.motionX = this.worldObj.rand.nextGaussian() * f3;
             entityitem.motionY = 0.2D;
@@ -780,7 +780,8 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
         this.colorBase = new Color(compound.getInteger("colorBase"));
         this.fluid = new FluidStack(FluidRegistry.getFluid(compound.getShort("fluid")), (int) (this.volume * 1000.0F));
         this.needsUpdate = true;
-        if (!compound.getString("block").equals("")) {
+        if (!compound.getString("block")
+            .equals("")) {
             this.block = (Block) Block.blockRegistry.getObject(compound.getString("block"));
         } else {
             this.block = null;
@@ -790,7 +791,7 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
             this.outputStack = ItemStack.loadItemStackFromNBT((NBTTagCompound) compound.getTag("outputStack"));
         if (compound.hasKey("entity")) {
             this.entity = (EntityLivingBase) EntityList
-                    .createEntityFromNBT((NBTTagCompound) compound.getTag("entity"), this.worldObj);
+                .createEntityFromNBT((NBTTagCompound) compound.getTag("entity"), this.worldObj);
             this.entityParticleName = compound.getString("entityParticleName");
             if (compound.hasKey("peacefulDrop"))
                 this.peacefulDrop = ItemStack.loadItemStackFromNBT((NBTTagCompound) compound.getTag("peacefulDrop"));
@@ -966,8 +967,8 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
             for (int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
                     if (this.worldObj.getBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z) == block
-                            && this.worldObj.getBlockMetadata(this.xCoord + x, this.yCoord + y, this.zCoord + z)
-                                    == blockMeta)
+                        && this.worldObj.getBlockMetadata(this.xCoord + x, this.yCoord + y, this.zCoord + z)
+                            == blockMeta)
                         count++;
                 }
             }
@@ -980,16 +981,17 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) out.add(
-                        new ItemInfo(
-                                this.worldObj.getBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z),
-                                this.worldObj.getBlockMetadata(this.xCoord + x, this.yCoord + y, this.zCoord + z)));
+                    new ItemInfo(
+                        this.worldObj.getBlock(this.xCoord + x, this.yCoord + y, this.zCoord + z),
+                        this.worldObj.getBlockMetadata(this.xCoord + x, this.yCoord + y, this.zCoord + z)));
             }
         }
         return out;
     }
 
     public int getLightLevel() {
-        if (getMode() == BarrelMode.FLUID) return this.fluid.getFluid().getLuminosity();
+        if (getMode() == BarrelMode.FLUID) return this.fluid.getFluid()
+            .getLuminosity();
         if (getMode() == BarrelMode.BLAZE || getMode() == BarrelMode.BLAZE_COOKING) return 15;
         return 0;
     }
@@ -1041,7 +1043,8 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
                     EntityWithItem mob = BarrelRecipeRegistry.getMobOutput(this.fluid, stack);
                     if (mob != null) {
                         try {
-                            Constructor<EntityLivingBase> constructor = mob.getEntity().getConstructor(World.class);
+                            Constructor<EntityLivingBase> constructor = mob.getEntity()
+                                .getConstructor(World.class);
                             this.entity = constructor.newInstance(this.worldObj);
                         } catch (Exception ignored) {}
                         this.entityParticleName = mob.getParticle();
@@ -1105,7 +1108,7 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
         if (side == 0 && slot == 0) {
             if ((getMode()).canExtract == ExtractMode.Always) return true;
             return this.worldObj.difficultySetting.getDifficultyId() == 0
-                    && (getMode()).canExtract == ExtractMode.PeacefulOnly;
+                && (getMode()).canExtract == ExtractMode.PeacefulOnly;
         }
         return false;
     }
@@ -1117,15 +1120,16 @@ public class TileEntityBarrel extends TileEntity implements IFluidHandler, ISide
             if (BarrelConfig.enableBarrelRecipeDirt && CompostRegistry.containsItem(item, meta)) return true;
         ItemInfo output = BarrelRecipeRegistry.getOutput(this.fluid, stack);
         if (isFull() && this.outputStack == null
-                && output != null
-                && !stack.getItem().hasContainerItem(new ItemStack(output.getItem(), 1, output.getMeta())))
+            && output != null
+            && !stack.getItem()
+                .hasContainerItem(new ItemStack(output.getItem(), 1, output.getMeta())))
             return true;
         EntityWithItem entity = BarrelRecipeRegistry.getMobOutput(this.fluid, stack);
         if (isFull() && entity != null
-                && !stack.getItem().hasContainerItem(stack)
-                && this.outputStack == null
-                && !isCookingMob())
-            return true;
+            && !stack.getItem()
+                .hasContainerItem(stack)
+            && this.outputStack == null
+            && !isCookingMob()) return true;
         if (getMode() == BarrelMode.FLUID && isFull()) {
             if (this.fluid.getFluidID() == FluidRegistry.LAVA.getID())
                 if (BarrelConfig.enableBarrelRecipeBlazeRod && item == ENItems.DollAngry) return true;

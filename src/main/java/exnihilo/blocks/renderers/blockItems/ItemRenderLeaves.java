@@ -29,7 +29,7 @@ public class ItemRenderLeaves implements IItemRenderer {
 
     @Override
     public boolean shouldUseRenderHelper(IItemRenderer.ItemRenderType type, ItemStack item,
-            IItemRenderer.ItemRendererHelper helper) {
+        IItemRenderer.ItemRendererHelper helper) {
         return Objects.requireNonNull(type) != ItemRenderType.FIRST_PERSON_MAP;
     }
 
@@ -52,15 +52,16 @@ public class ItemRenderLeaves implements IItemRenderer {
         }
         bindTexture();
         this.model.render(
-                new Color(Blocks.leaves.getRenderColor(item.getItemDamage())),
-                Blocks.leaves.getIcon(0, item.getItemDamage()),
-                2147483647,
-                blend);
+            new Color(Blocks.leaves.getRenderColor(item.getItemDamage())),
+            Blocks.leaves.getIcon(0, item.getItemDamage()),
+            2147483647,
+            blend);
         GL11.glPopMatrix();
     }
 
     protected void bindTexture() {
-        TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
+        TextureManager texturemanager = Minecraft.getMinecraft()
+            .getTextureManager();
         if (texturemanager != null) texturemanager.bindTexture(TextureMap.locationBlocksTexture);
     }
 }

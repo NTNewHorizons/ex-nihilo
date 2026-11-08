@@ -40,5 +40,5 @@ public class ChunkProviderDefaultVoid extends ChunkProviderGenerate {
 
     @Override
     public void replaceBlocksForBiome(int par1, int par2, Block[] par3ArrayOfBlock, byte[] par4ArrayofBytes,
-            BiomeGenBase[] par4ArrayOfBiomeGenBase) {}
+        BiomeGenBase[] par4ArrayOfBiomeGenBase) {}
 }

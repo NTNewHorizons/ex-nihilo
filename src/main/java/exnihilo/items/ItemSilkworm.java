@@ -20,7 +20,7 @@ public class ItemSilkworm extends Item {
 
     @Override
     public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int par7,
-            float par8, float par9, float par10) {
+        float par8, float par9, float par10) {
         if (!world.isAirBlock(x, y, z)) {
             Block block = world.getBlock(x, y, z);
             if (block.isLeaves(world, 0, 0, 0) && block != ENBlocks.LeavesInfested && !Forestry.addsThisLeaf(block)) {

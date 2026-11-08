@@ -3,8 +3,6 @@ package exnihilo.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import exnihilo.ENItems;
-import exnihilo.api.items.IMesh;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -22,7 +20,9 @@ import net.minecraftforge.common.util.FakePlayer;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import exnihilo.ENItems;
 import exnihilo.ExNihilo;
+import exnihilo.api.items.IMesh;
 import exnihilo.blocks.tileentities.TileEntitySieve;
 import exnihilo.config.SieveConfig;
 import exnihilo.data.BlockData;
@@ -95,7 +95,7 @@ public class BlockSieve extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
-            float hitY, float hitZ) {
+        float hitY, float hitZ) {
         if (world.isRemote) return true;
 
         if (!isHuman(player) && !SieveConfig.allowSieveAutomation) return false;
@@ -107,14 +107,18 @@ public class BlockSieve extends BlockContainer {
         ItemStack held = player.getCurrentEquippedItem();
 
         if (held == null && sieve.getCurrentMesh() != null
-                && player.isSneaking()
-                && sieve.getCurrentStack() == BlockInfo.EMPTY) {
+            && player.isSneaking()
+            && sieve.getCurrentStack() == BlockInfo.EMPTY) {
             EntityItem entityItem = new EntityItem(
-                    world,
-                    sieve.xCoord + 0.5D,
-                    sieve.yCoord + 1.5D,
-                    sieve.zCoord + 0.5D,
-                    new ItemStack(sieve.getCurrentMesh().getItem(), 1, 0));
+                world,
+                sieve.xCoord + 0.5D,
+                sieve.yCoord + 1.5D,
+                sieve.zCoord + 0.5D,
+                new ItemStack(
+                    sieve.getCurrentMesh()
+                        .getItem(),
+                    1,
+                    0));
             sieve.setCurrentMesh(null);
             world.spawnEntityInWorld(entityItem);
             return true;
@@ -128,7 +132,8 @@ public class BlockSieve extends BlockContainer {
                 return true;
             }
             if (sieve.getCurrentMesh() == null) return true;
-            ArrayList<SiftingResult> result = SieveRegistry.getSiftingOutput(new ItemInfo(held), sieve.getCurrentMesh());
+            ArrayList<SiftingResult> result = SieveRegistry
+                .getSiftingOutput(new ItemInfo(held), sieve.getCurrentMesh());
             if (result != null) {
                 outerloop: for (int dx = -SIEVE_RADIUS; dx <= SIEVE_RADIUS; dx++) {
                     for (int dz = -SIEVE_RADIUS; dz <= SIEVE_RADIUS; dz++) {
@@ -137,7 +142,7 @@ public class BlockSieve extends BlockContainer {
                         if (!(otherTE instanceof TileEntitySieve otherSieve)) continue; // Not a sieve
 
                         if (otherSieve.getCurrentStack() == BlockInfo.EMPTY
-                                && otherSieve.getCurrentMesh() == sieve.getCurrentMesh()) {
+                            && otherSieve.getCurrentMesh() == sieve.getCurrentMesh()) {
                             otherSieve.addSievable(Block.getBlockFromItem(held.getItem()), held.getItemDamage());
                             held = removeCurrentItem(player);
                         }
@@ -151,7 +156,7 @@ public class BlockSieve extends BlockContainer {
             for (int dz = -SIEVE_RADIUS; dz <= SIEVE_RADIUS; dz++) {
                 final TileEntity te = world.getTileEntity(x + dx, y, z + dz);
                 if ((te instanceof TileEntitySieve teSieve) && teSieve.getCurrentStack() != BlockInfo.EMPTY
-                        && teSieve.getCurrentMesh() == sieve.getCurrentMesh()) {
+                    && teSieve.getCurrentMesh() == sieve.getCurrentMesh()) {
                     teSieve.ProcessContents();
                 }
             }
@@ -161,16 +166,20 @@ public class BlockSieve extends BlockContainer {
     }
 
     @Override
-    public void breakBlock(World worldIn, int x, int y, int z, Block blockBroken, int meta)
-    {
+    public void breakBlock(World worldIn, int x, int y, int z, Block blockBroken, int meta) {
         TileEntity te = worldIn.getTileEntity(x, y, z);
         if (te instanceof TileEntitySieve tileEntitySieve) {
             if (tileEntitySieve.getCurrentMesh() != null && !worldIn.isRemote) {
-                final EntityItem entityitem = new EntityItem(worldIn,
+                final EntityItem entityitem = new EntityItem(
+                    worldIn,
                     x + 0.5D,
                     y + 1.5D,
                     z + 0.5D,
-                    new ItemStack(tileEntitySieve.getCurrentMesh().getItem(), 1, 0));
+                    new ItemStack(
+                        tileEntitySieve.getCurrentMesh()
+                            .getItem(),
+                        1,
+                        0));
                 entityitem.motionX = worldIn.rand.nextGaussian() * 0.02F;
                 entityitem.motionY = 0.1D;
                 entityitem.motionZ = worldIn.rand.nextGaussian() * 0.02F;

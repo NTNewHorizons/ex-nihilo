@@ -1,6 +1,5 @@
 package exnihilo.blocks;
 
-import exnihilo.ExNihilo;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,6 +16,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import exnihilo.ExNihilo;
 import exnihilo.blocks.tileentities.TileEntityCrucible;
 import exnihilo.data.BlockData;
 
@@ -68,7 +68,7 @@ public class BlockCrucible extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
-            float par8, float par9) {
+        float par8, float par9) {
         if (player == null) return false;
         TileEntityCrucible crucible = (TileEntityCrucible) world.getTileEntity(x, y, z);
         if (player.getCurrentEquippedItem() != null) {
@@ -85,8 +85,8 @@ public class BlockCrucible extends BlockContainer {
                     if (!player.capabilities.isCreativeMode)
                         if (item.getItem() == Items.potionitem && item.getItemDamage() == 0) {
                             player.inventory.setInventorySlotContents(
-                                    player.inventory.currentItem,
-                                    new ItemStack(Items.glass_bottle, 1, 0));
+                                player.inventory.currentItem,
+                                new ItemStack(Items.glass_bottle, 1, 0));
                         } else {
                             player.inventory.setInventorySlotContents(player.inventory.currentItem, getContainer(item));
                         }
@@ -117,7 +117,10 @@ public class BlockCrucible extends BlockContainer {
 
     private ItemStack getContainer(ItemStack item) {
         if (item.stackSize == 1) {
-            if (item.getItem().hasContainerItem(item)) return item.getItem().getContainerItem(item);
+            if (item.getItem()
+                .hasContainerItem(item))
+                return item.getItem()
+                    .getContainerItem(item);
             return null;
         }
         item.splitStack(1);

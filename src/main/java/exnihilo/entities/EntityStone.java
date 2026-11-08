@@ -26,13 +26,13 @@ public class EntityStone extends EntityThrowable {
         if (position.entityHit != null)
             position.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 0.5F);
         for (int i = 0; i < 10; i++) this.worldObj.spawnParticle(
-                "townaura",
-                position.hitVec.xCoord,
-                position.hitVec.yCoord,
-                position.hitVec.zCoord,
-                0.0D,
-                0.0D,
-                0.0D);
+            "townaura",
+            position.hitVec.xCoord,
+            position.hitVec.yCoord,
+            position.hitVec.zCoord,
+            0.0D,
+            0.0D,
+            0.0D);
         this.worldObj.playSoundAtEntity(this, "dig.stone", 0.5F, 1.0F);
         if (!this.worldObj.isRemote && this.worldObj.difficultySetting.getDifficultyId() > 0) {
             if (this.worldObj.rand.nextInt(64) == 0) {

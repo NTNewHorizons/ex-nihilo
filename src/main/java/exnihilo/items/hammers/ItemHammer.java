@@ -39,7 +39,7 @@ public class ItemHammer extends ItemTool implements IHammer {
     @Override
     public float getDigSpeed(ItemStack item, Block block, int meta) {
         if (HammerRegistry.registered(new ItemStack(block, 1, meta))
-                && block.getHarvestLevel(meta) <= this.toolMaterial.getHarvestLevel())
+            && block.getHarvestLevel(meta) <= this.toolMaterial.getHarvestLevel())
             return this.efficiencyOnProperMaterial * 0.75F;
         return 0.8F;
     }

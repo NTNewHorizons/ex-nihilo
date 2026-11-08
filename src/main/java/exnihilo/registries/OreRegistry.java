@@ -72,7 +72,7 @@ public class OreRegistry {
     }
 
     public static void createOverworldOre(String name, Color color, int rarity, Item existingIngot,
-            boolean skipFurnaceRecipes) {
+        boolean skipFurnaceRecipes) {
         createOre(0, name, color, rarity, existingIngot, skipFurnaceRecipes);
     }
 
@@ -89,7 +89,7 @@ public class OreRegistry {
     }
 
     public static void createNetherOre(String name, Color color, int rarity, Item existingIngot,
-            boolean skipFurnaceRecipes) {
+        boolean skipFurnaceRecipes) {
         createOre(-1, name, color, rarity, existingIngot, skipFurnaceRecipes);
     }
 
@@ -106,12 +106,12 @@ public class OreRegistry {
     }
 
     public static void createEnderOre(String name, Color color, int rarity, Item existingIngot,
-            boolean skipFurnaceRecipes) {
+        boolean skipFurnaceRecipes) {
         createOre(1, name, color, rarity, existingIngot, skipFurnaceRecipes);
     }
 
     private static void createOre(int type, String name, Color color, int rarity, Item existingIngot,
-            boolean skipFurnaceRecipes) {
+        boolean skipFurnaceRecipes) {
         if (ores.contains(type + "_" + name.toLowerCase())) return;
         ores.add(type + "_" + name.toLowerCase());
         BlockOre gravel = null;
@@ -245,17 +245,18 @@ public class OreRegistry {
 
     private static void registerCraftingRecipe(ItemOre ingredient, BlockOre result) {
         GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                        new ItemStack(result, 1, 0),
-                        "xx",
-                        "xx",
+            new ShapedOreRecipe(
+                new ItemStack(result, 1, 0),
+                "xx",
+                "xx",
 
-                        'x',
-                        ingredient));
+                'x',
+                ingredient));
     }
 
     private static void registerFurnaceRecipe(BlockOre ore, Item ingot) {
-        FurnaceRecipes.smelting().func_151393_a(ore, new ItemStack(ingot, 1, 0), 0.1F);
+        FurnaceRecipes.smelting()
+            .func_151393_a(ore, new ItemStack(ingot, 1, 0), 0.1F);
     }
 
     private static void registerSieveRecipe(Block block, ItemOre item, int rarity) {
@@ -264,7 +265,8 @@ public class OreRegistry {
 
     private static String formatOreName(String input) {
         String lcase = input.toLowerCase();
-        return lcase.substring(0, 1).toUpperCase() + lcase.substring(1);
+        return lcase.substring(0, 1)
+            .toUpperCase() + lcase.substring(1);
     }
 
     public static Block getGravel(String name) {

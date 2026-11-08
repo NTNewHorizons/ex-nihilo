@@ -3,7 +3,6 @@ package exnihilo;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +29,15 @@ import exnihilo.compatibility.OreList;
 import exnihilo.compatibility.ThermalExpansion;
 import exnihilo.compatibility.TinkersConstruct;
 import exnihilo.compatibility.foresty.Forestry;
-import exnihilo.config.*;
+import exnihilo.config.BarrelConfig;
+import exnihilo.config.ColorConfig;
+import exnihilo.config.CrookConfig;
+import exnihilo.config.CrucibleConfig;
+import exnihilo.config.GeneralConfig;
+import exnihilo.config.HammerConfig;
+import exnihilo.config.OreConfig;
+import exnihilo.config.SieveConfig;
+import exnihilo.config.WorldConfig;
 import exnihilo.events.HandlerHammer;
 import exnihilo.events.HandlerNEIRecipeHandlerInfo;
 import exnihilo.network.ENPacketHandler;
@@ -88,8 +95,7 @@ public class ExNihilo {
         proxy.initializeRenderers();
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new HandlerHammer());
-        if (Loader.isModLoaded("notenoughitems"))
-            MinecraftForge.EVENT_BUS.register(new HandlerNEIRecipeHandlerInfo());
+        if (Loader.isModLoaded("notenoughitems")) MinecraftForge.EVENT_BUS.register(new HandlerNEIRecipeHandlerInfo());
     }
 
     @EventHandler

@@ -73,13 +73,14 @@ public class ItemOreFactory {
 
     private static String formatName(String input) {
         String lcase = input.toLowerCase();
-        String output = lcase.substring(0, 1).toUpperCase() + lcase.substring(1);
+        String output = lcase.substring(0, 1)
+            .toUpperCase() + lcase.substring(1);
         return output;
     }
 
     @SideOnly(Side.CLIENT)
     private static void attachTexture(ItemOre item, String name, ResourceLocation base, ResourceLocation template,
-            Color color) {
+        Color color) {
         TextureFactory.makeTexture(item, name, base, template, color);
     }
 }

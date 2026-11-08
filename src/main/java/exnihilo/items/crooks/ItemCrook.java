@@ -38,11 +38,21 @@ public class ItemCrook extends ItemTool {
     }
 
     public boolean canItemHarvestBlock(Block block) {
-        return block.isLeaves(Proxy.getProxy().getWorldObj(), 0, 0, 0);
+        return block.isLeaves(
+            Proxy.getProxy()
+                .getWorldObj(),
+            0,
+            0,
+            0);
     }
 
     public float getStrVsBlock(ItemStack item, Block block) {
-        if (block.isLeaves(Proxy.getProxy().getWorldObj(), 0, 0, 0)) return this.efficiencyOnProperMaterial + 1.0F;
+        if (block.isLeaves(
+            Proxy.getProxy()
+                .getWorldObj(),
+            0,
+            0,
+            0)) return this.efficiencyOnProperMaterial + 1.0F;
         return 1.0F;
     }
 
@@ -56,7 +66,7 @@ public class ItemCrook extends ItemTool {
     public boolean onLeftClickEntity(ItemStack item, EntityPlayer player, Entity entity) {
         if (!player.worldObj.isRemote) {
             double distance = Math
-                    .sqrt(Math.pow(player.posX - entity.posX, 2.0D) + Math.pow(player.posZ - entity.posZ, 2.0D));
+                .sqrt(Math.pow(player.posX - entity.posX, 2.0D) + Math.pow(player.posZ - entity.posZ, 2.0D));
             double scalarX = (player.posX - entity.posX) / distance;
             double scalarZ = (player.posZ - entity.posZ) / distance;
             double velX = 0.0D - scalarX * 1.5D;
@@ -71,7 +81,7 @@ public class ItemCrook extends ItemTool {
     @Override
     public boolean itemInteractionForEntity(ItemStack item, EntityPlayer player, EntityLivingBase entity) {
         double distance = Math
-                .sqrt(Math.pow(player.posX - entity.posX, 2.0D) + Math.pow(player.posZ - entity.posZ, 2.0D));
+            .sqrt(Math.pow(player.posX - entity.posX, 2.0D) + Math.pow(player.posZ - entity.posZ, 2.0D));
         double scalarX = (player.posX - entity.posX) / distance;
         double scalarZ = (player.posZ - entity.posZ) / distance;
         double velX = scalarX * 1.5D;
@@ -84,11 +94,11 @@ public class ItemCrook extends ItemTool {
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
-            float hitX, float hitY, float hitZ) {
+        float hitX, float hitY, float hitZ) {
         if (!world.isRemote && world.getBlock(x, y, z) == Blocks.dirt
-                && world.getBlock(x, y + 1, z) == Blocks.water
-                && ForgeDirection.getOrientation(side) == ForgeDirection.UP
-                && CrookConfig.lilypadChance > 0) {
+            && world.getBlock(x, y + 1, z) == Blocks.water
+            && ForgeDirection.getOrientation(side) == ForgeDirection.UP
+            && CrookConfig.lilypadChance > 0) {
             if (world.rand.nextInt(CrookConfig.lilypadChance) == 0) {
                 EntityItem item = new EntityItem(world, x, (y + 1), z, new ItemStack(Blocks.waterlily));
                 world.spawnEntityInWorld(item);

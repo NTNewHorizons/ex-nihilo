@@ -11,13 +11,13 @@ import exnihilo.ENBlocks;
 public class ModelBarrel extends ModelBase {
 
     private static final ResourceLocation[] textures = new ResourceLocation[] {
-            new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelOak.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelSpruce.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelBirch.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelJungle.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelAcacia.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelDarkOak.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelStone.png") };
+        new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelOak.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelSpruce.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelBirch.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelJungle.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelAcacia.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelDarkOak.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelBarrelStone.png") };
 
     public final ModelRenderer bottom;
 

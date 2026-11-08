@@ -50,17 +50,25 @@ public class RenderSieve extends TileEntitySpecialRenderer {
             GL11.glPushMatrix();
             GL11.glTranslatef((float) x + 0.5F, (float) y + 0.69F, (float) z + 0.5F);
             bindTexture(TextureMap.locationBlocksTexture);
-            this.mesh.render(sieve.getCurrentMesh().getSieveRenderIcon());
+            this.mesh.render(
+                sieve.getCurrentMesh()
+                    .getSieveRenderIcon());
             GL11.glPopMatrix();
         }
     }
 
     private void renderContents(TileEntity tileentity, double x, double y, double z, float f) {
         TileEntitySieve sieve = (TileEntitySieve) tileentity;
-        if (sieve.getCurrentStack().getBlock() == Blocks.air) {
+        if (sieve.getCurrentStack()
+            .getBlock() == Blocks.air) {
             return;
         }
-        IIcon icon = sieve.getCurrentStack().getBlock().getIcon(0, sieve.getCurrentStack().getMeta());
+        IIcon icon = sieve.getCurrentStack()
+            .getBlock()
+            .getIcon(
+                0,
+                sieve.getCurrentStack()
+                    .getMeta());
         bindTexture(TextureMap.locationBlocksTexture);
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + sieve.getAdjustedProgress(), (float) z + 0.5F);

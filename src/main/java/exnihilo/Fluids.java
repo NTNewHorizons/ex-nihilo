@@ -36,15 +36,15 @@ public class Fluids {
         BucketWitchWater = new ItemBucketWitchWater(blockWitchWater);
         GameRegistry.registerItem(BucketWitchWater, "bucket_witchwater");
         FluidContainerRegistry.registerFluidContainer(
-                FluidRegistry.getFluidStack("witchwater", 1000),
-                new ItemStack(BucketWitchWater),
-                new ItemStack(Items.bucket));
+            FluidRegistry.getFluidStack("witchwater", 1000),
+            new ItemStack(BucketWitchWater),
+            new ItemStack(Items.bucket));
         BucketHandler.INSTANCE.buckets.put(blockWitchWater, BucketWitchWater);
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
     }
 
     public static void registerIcons(TextureStitchEvent.Post event) {
         if (event.map.getTextureType() == 0) fluidWitchWater
-                .setIcons(blockWitchWater.getBlockTextureFromSide(1), blockWitchWater.getBlockTextureFromSide(2));
+            .setIcons(blockWitchWater.getBlockTextureFromSide(1), blockWitchWater.getBlockTextureFromSide(2));
     }
 }

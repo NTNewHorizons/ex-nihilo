@@ -3,7 +3,6 @@ package exnihilo.registries;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import exnihilo.api.items.IMesh;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -14,6 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import exnihilo.ENBlocks;
 import exnihilo.ENItems;
 import exnihilo.ExNihilo;
+import exnihilo.api.items.IMesh;
 import exnihilo.registries.helpers.SiftingResult;
 import exnihilo.utils.ItemInfo;
 
@@ -26,33 +26,36 @@ public class SieveRegistry {
     private static final HashMap<IMesh, HashMap<ItemInfo, ArrayList<SiftingResult>>> siftables = new HashMap<>();
 
     static {
-        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry().values()) {
+        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry()
+            .values()) {
             siftables.put(mesh, new HashMap<>());
         }
     }
 
-    public static void register(Block source, int sourceMeta, Item output, int outputMeta, int rarity,
-            IMesh mesh) {
+    public static void register(Block source, int sourceMeta, Item output, int outputMeta, int rarity, IMesh mesh) {
         if (source == null || output == null) return;
         if (rarity > 0) {
             ItemInfo iteminfo = new ItemInfo(source, sourceMeta);
-            ArrayList<SiftingResult> res = siftables.get(mesh).get(iteminfo);
+            ArrayList<SiftingResult> res = siftables.get(mesh)
+                .get(iteminfo);
             if (res == null) res = new ArrayList<>();
             res.add(new SiftingResult(new ItemInfo(output, outputMeta), rarity));
-            siftables.get(mesh).put(iteminfo, res);
+            siftables.get(mesh)
+                .put(iteminfo, res);
         } else {
             ItemStack inputStack = new ItemStack(source, sourceMeta);
             ItemStack outputStack = new ItemStack(output, outputMeta);
             ExNihilo.log.info(
-                    "Block " + inputStack.getDisplayName()
-                            + " with reward "
-                            + outputStack.getDisplayName()
-                            + " was not added. Reason: Chance 0");
+                "Block " + inputStack.getDisplayName()
+                    + " with reward "
+                    + outputStack.getDisplayName()
+                    + " was not added. Reason: Chance 0");
         }
     }
 
     public static void register(Block source, int sourceMeta, Item output, int outputMeta, int rarity) {
-        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry().values()) {
+        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry()
+            .values()) {
             register(source, sourceMeta, output, outputMeta, rarity, mesh);
         }
     }
@@ -62,17 +65,20 @@ public class SieveRegistry {
     }
 
     public static void register(Block source, Item output, int outputMeta, int rarity) {
-        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry().values()) {
+        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry()
+            .values()) {
             register(source, output, outputMeta, rarity, mesh);
         }
     }
 
     public static ArrayList<SiftingResult> getSiftingOutput(Block block, int meta, IMesh mesh) {
-        return siftables.get(mesh).get(new ItemInfo(block, meta));
+        return siftables.get(mesh)
+            .get(new ItemInfo(block, meta));
     }
 
     public static ArrayList<SiftingResult> getSiftingOutput(ItemInfo info, IMesh mesh) {
-        return siftables.get(mesh).get(info);
+        return siftables.get(mesh)
+            .get(info);
     }
 
     public static boolean registered(Block block, int meta, IMesh mesh) {
@@ -89,21 +95,27 @@ public class SieveRegistry {
 
     public static void unregisterReward(Block block, int meta, Item output, int outputMeta, IMesh mesh) {
         ItemInfo iteminfo = new ItemInfo(block, meta);
-        ArrayList<SiftingResult> res = siftables.get(mesh).get(iteminfo);
+        ArrayList<SiftingResult> res = siftables.get(mesh)
+            .get(iteminfo);
         if (res == null) return;
         res.removeIf(sr -> sr.drop.getItem() == output && sr.drop.getMeta() == outputMeta);
-        if (res.isEmpty()) siftables.get(mesh).remove(iteminfo);
+        if (res.isEmpty()) siftables.get(mesh)
+            .remove(iteminfo);
     }
 
     public static void unregisterReward(Block block, int meta, Item output, int outputMeta) {
-        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry().values()) {
+        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry()
+            .values()) {
             unregisterReward(block, meta, output, outputMeta, mesh);
         }
     }
 
     public static void unregisterRewardFromAllBlocks(Item output, int outputMeta) {
-        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry().values()) {
-            for (ItemInfo iteminfo : siftables.get(mesh).keySet()) unregisterReward(
+        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry()
+            .values()) {
+            for (ItemInfo iteminfo : siftables.get(mesh)
+                .keySet())
+                unregisterReward(
                     Block.getBlockFromItem(iteminfo.getItem()),
                     iteminfo.getMeta(),
                     output,
@@ -113,8 +125,10 @@ public class SieveRegistry {
     }
 
     public static void unregisterAllRewardsFromBlock(Block block, int meta) {
-        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry().values()) {
-            siftables.get(mesh).remove(new ItemInfo(block, meta));
+        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry()
+            .values()) {
+            siftables.get(mesh)
+                .remove(new ItemInfo(block, meta));
         }
     }
 
@@ -162,11 +176,11 @@ public class SieveRegistry {
             for (ItemStack stack : OreDictionary.getOres(current[0])) {
                 Item reward = (Item) Item.itemRegistry.getObject(current[1] + ":" + current[2]);
                 if (Block.getBlockFromItem(stack.getItem()) != null) register(
-                        Block.getBlockFromItem(stack.getItem()),
-                        stack.getItemDamage(),
-                        reward,
-                        Integer.parseInt(current[3]),
-                        Integer.parseInt(current[4]));
+                    Block.getBlockFromItem(stack.getItem()),
+                    stack.getItemDamage(),
+                    reward,
+                    Integer.parseInt(current[3]),
+                    Integer.parseInt(current[4]));
             }
         }
     }
@@ -178,23 +192,27 @@ public class SieveRegistry {
                 Block source = (Block) Block.blockRegistry.getObject(current[0] + ":" + current[1]);
                 Item reward = (Item) Item.itemRegistry.getObject(current[3] + ":" + current[4]);
                 register(
-                        source,
-                        Integer.parseInt(current[2]),
-                        reward,
-                        Integer.parseInt(current[5]),
-                        Integer.parseInt(current[6]));
+                    source,
+                    Integer.parseInt(current[2]),
+                    reward,
+                    Integer.parseInt(current[5]),
+                    Integer.parseInt(current[6]));
             }
         }
     }
 
     public static HashMap<IMesh, ArrayList<ItemInfo>> getSources(ItemStack reward) {
         HashMap<IMesh, ArrayList<ItemInfo>> res = new HashMap<>();
-        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry().values()) {
+        for (IMesh mesh : MeshRegistry.INSTANCE.getRegistry()
+            .values()) {
             res.put(mesh, new ArrayList<>());
-            for (ItemInfo entry : siftables.get(mesh).keySet()) {
-                for (SiftingResult sift : siftables.get(mesh).get(entry)) {
+            for (ItemInfo entry : siftables.get(mesh)
+                .keySet()) {
+                for (SiftingResult sift : siftables.get(mesh)
+                    .get(entry)) {
                     if ((new ItemInfo(sift.drop.getItem(), sift.drop.getMeta())).equals(new ItemInfo(reward)))
-                        res.get(mesh).add(entry);
+                        res.get(mesh)
+                            .add(entry);
                 }
             }
         }

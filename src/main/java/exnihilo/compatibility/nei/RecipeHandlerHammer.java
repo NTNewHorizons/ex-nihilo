@@ -112,13 +112,14 @@ public class RecipeHandlerHammer extends TemplateRecipeHandler {
     @Override
     public void loadTransferRects() {
         this.transferRects
-                .add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(75, 22, 15, 13), "exnihilo.hammer"));
+            .add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(75, 22, 15, 13), "exnihilo.hammer"));
     }
 
     @Override
     public void loadCraftingRecipes(String outputID, Object... results) {
         if (outputID.equals("exnihilo.hammer")) {
-            for (ItemInfo ii : HammerRegistry.getRewards().keySet()) {
+            for (ItemInfo ii : HammerRegistry.getRewards()
+                .keySet()) {
                 ItemStack inputStack = ii.getStack();
                 ArrayList<ItemStack> resultStack = new ArrayList<>();
                 HashMap<ItemInfo, Integer> cache = new HashMap<>();
@@ -149,7 +150,7 @@ public class RecipeHandlerHammer extends TemplateRecipeHandler {
             if (!completed.contains(ii)) {
                 HashMap<ItemInfo, Integer> stored = new HashMap<>();
                 for (Smashable results : HammerRegistry
-                        .getRewards(Block.getBlockFromItem(ii.getItem()), ii.getMeta())) {
+                    .getRewards(Block.getBlockFromItem(ii.getItem()), ii.getMeta())) {
                     ItemInfo current = new ItemInfo(results.item, results.meta);
                     if (stored.containsKey(current)) {
                         stored.put(current, stored.get(current) + 1);
@@ -175,7 +176,7 @@ public class RecipeHandlerHammer extends TemplateRecipeHandler {
         if (Block.getBlockFromItem(ingredient.getItem()) == Blocks.air) return;
         if (!HammerRegistry.registered(ingredient)) return;
         for (Smashable results : HammerRegistry
-                .getRewards(Block.getBlockFromItem(ingredient.getItem()), ingredient.getItemDamage())) {
+            .getRewards(Block.getBlockFromItem(ingredient.getItem()), ingredient.getItemDamage())) {
             ItemInfo current = new ItemInfo(results.item, results.meta);
             if (stored.containsKey(current)) {
                 stored.put(current, stored.get(current) + 1);
@@ -198,14 +199,14 @@ public class RecipeHandlerHammer extends TemplateRecipeHandler {
 
     @Override
     public List<String> handleItemTooltip(GuiRecipe<?> guiRecipe, ItemStack itemStack, List<String> currenttip,
-            int recipe) {
+        int recipe) {
         super.handleItemTooltip(guiRecipe, itemStack, currenttip, recipe);
         CachedHammerRecipe crecipe = (CachedHammerRecipe) this.arecipes.get(recipe);
         Point mouse = GuiDraw.getMousePosition();
         Point offset = guiRecipe.getRecipePosition(recipe);
         Point relMouse = new Point(
-                mouse.x - (guiRecipe.width - 176) / 2 - offset.x,
-                mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
+            mouse.x - (guiRecipe.width - 176) / 2 - offset.x,
+            mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
         if (itemStack != null && relMouse.y > 34 && relMouse.y < 55) {
             currenttip.add("Drop Chance:");
             ItemStack sourceStack = (crecipe.input.get(0)).item;
@@ -217,13 +218,13 @@ public class RecipeHandlerHammer extends TemplateRecipeHandler {
                     int fortune = (int) (100.0F * smash.luckMultiplier);
                     if (fortune > 0) {
                         currenttip.add(
-                                "  * " + chance
-                                        + "%"
-                                        + EnumChatFormatting.BLUE
-                                        + " (+"
-                                        + fortune
-                                        + "% luck bonus)"
-                                        + EnumChatFormatting.RESET);
+                            "  * " + chance
+                                + "%"
+                                + EnumChatFormatting.BLUE
+                                + " (+"
+                                + fortune
+                                + "% luck bonus)"
+                                + EnumChatFormatting.RESET);
                         continue;
                     }
                     currenttip.add("  * " + chance + "%");

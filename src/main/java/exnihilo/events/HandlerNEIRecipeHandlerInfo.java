@@ -22,6 +22,7 @@ public class HandlerNEIRecipeHandlerInfo {
 
     Consumer<HandlerInfo.Builder> handlerInfoSieveBuilder = b -> {
         ExNihilo.log.info("Fucking why the hell doesn't this work please god make it stop");
-        b.setMaxRecipesPerPage(4).setDisplayStack(new ItemStack(Item.getItemFromBlock(ENBlocks.Sieve), 1, 0));
+        b.setMaxRecipesPerPage(4)
+            .setDisplayStack(new ItemStack(Item.getItemFromBlock(ENBlocks.Sieve), 1, 0));
     };
 }

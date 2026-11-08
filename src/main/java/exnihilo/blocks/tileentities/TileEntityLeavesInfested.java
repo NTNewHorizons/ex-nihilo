@@ -78,11 +78,11 @@ public class TileEntityLeavesInfested extends TileEntity {
         Block target = this.worldObj.getBlock(placeX, placeY, placeZ);
         int meta = this.worldObj.getBlockMetadata(placeX, placeY, placeZ);
         if (target != null && target.isLeaves(this.worldObj, x, y, z)
-                && target != ENBlocks.LeavesInfested
-                && !Forestry.addsThisLeaf(target)) {
+            && target != ENBlocks.LeavesInfested
+            && !Forestry.addsThisLeaf(target)) {
             this.worldObj.setBlock(placeX, placeY, placeZ, ENBlocks.LeavesInfested, meta, 2);
             TileEntityLeavesInfested te = (TileEntityLeavesInfested) this.worldObj
-                    .getTileEntity(placeX, placeY, placeZ);
+                .getTileEntity(placeX, placeY, placeZ);
             if (te != null) te.setMimicBlock(this.block, meta);
         }
     }
@@ -96,7 +96,8 @@ public class TileEntityLeavesInfested extends TileEntity {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.progress = compound.getFloat("progress");
-        if (!compound.getString("block").equals("")) {
+        if (!compound.getString("block")
+            .equals("")) {
             this.block = (Block) Block.blockRegistry.getObject(compound.getString("block"));
         } else {
             this.block = null;

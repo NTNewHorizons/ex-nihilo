@@ -50,7 +50,8 @@ public class ItemRenderSieve implements IItemRenderer {
     }
 
     protected void bindTexture(Block block, int meta) {
-        TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
+        TextureManager texturemanager = Minecraft.getMinecraft()
+            .getTextureManager();
         if (texturemanager != null) if (meta >= 0) texturemanager.bindTexture(this.model.getSieveTexture(block, meta));
     }
 

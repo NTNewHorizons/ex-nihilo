@@ -49,7 +49,8 @@ public class ItemRenderCrucible implements IItemRenderer {
     }
 
     protected void bindTexture() {
-        TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
+        TextureManager texturemanager = Minecraft.getMinecraft()
+            .getTextureManager();
         if (texturemanager != null) texturemanager.bindTexture(ModelCrucible.textures[0]);
     }
 }

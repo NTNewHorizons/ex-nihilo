@@ -61,12 +61,11 @@ public class TileEntityBeeTrap extends TileEntity {
             }
             if (this.complete) {
                 boolean canSeeSky = (this.yCoord
-                        >= this.worldObj.getTopSolidOrLiquidBlock(this.xCoord, this.zCoord) - 1);
+                    >= this.worldObj.getTopSolidOrLiquidBlock(this.xCoord, this.zCoord) - 1);
                 BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord);
                 Hive hive = HiveRegistry.getHive(biome, this.blocks, canSeeSky, this.yCoord);
                 if (hive != null
-                        && this.worldObj.rand.nextInt(50 - Math.min(30, hive.getSpawnChanceModifier(this.blocks)))
-                                == 0) {
+                    && this.worldObj.rand.nextInt(50 - Math.min(30, hive.getSpawnChanceModifier(this.blocks))) == 0) {
                     this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, hive.block, hive.meta, 3);
                 } else {
                     this.blocks = new Surrounding();
@@ -75,7 +74,7 @@ public class TileEntityBeeTrap extends TileEntity {
             } else {
                 Block block = this.worldObj.getBlock(this.xCoord + this.x, this.yCoord + this.y, this.zCoord + this.z);
                 int meta = this.worldObj
-                        .getBlockMetadata(this.xCoord + this.x, this.yCoord + this.y, this.zCoord + this.z);
+                    .getBlockMetadata(this.xCoord + this.x, this.yCoord + this.y, this.zCoord + this.z);
                 this.blocks.addBlock(this.worldObj, this.xCoord + this.x, this.yCoord + this.y, this.zCoord + this.z);
                 if (this.x == 0 && this.y == 1 && this.z == 0) this.blocks.setBlockAbove(block, meta);
                 this.x++;

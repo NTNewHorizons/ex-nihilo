@@ -49,7 +49,7 @@ public class BlockWitchWater extends BlockFluidClassic {
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register) {
         this.fluidIcons = new IIcon[] { register.registerIcon(ExNihilo.MODID + ":IconWitchWaterStill"),
-                register.registerIcon(ExNihilo.MODID + ":IconWitchWaterFlow") };
+            register.registerIcon(ExNihilo.MODID + ":IconWitchWaterFlow") };
     }
 
     @Override
@@ -60,7 +60,8 @@ public class BlockWitchWater extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
-        return ColorRegistry.color("witchwater").toInt();
+        return ColorRegistry.color("witchwater")
+            .toInt();
     }
 
     @Override
@@ -72,11 +73,11 @@ public class BlockWitchWater extends BlockFluidClassic {
                         villager.setDead();
                         EntityWitch witch = new EntityWitch(world);
                         witch.setLocationAndAngles(
-                                villager.posX,
-                                villager.posY,
-                                villager.posZ,
-                                villager.rotationYaw,
-                                villager.rotationPitch);
+                            villager.posX,
+                            villager.posY,
+                            villager.posZ,
+                            villager.rotationYaw,
+                            villager.rotationPitch);
                         witch.renderYawOffset = villager.renderYawOffset;
                         witch.setHealth(villager.getHealth());
                         world.spawnEntityInWorld(witch);
@@ -84,11 +85,11 @@ public class BlockWitchWater extends BlockFluidClassic {
                         villager.setDead();
                         EntityZombie zombie = new EntityZombie(world);
                         zombie.setLocationAndAngles(
-                                villager.posX,
-                                villager.posY,
-                                villager.posZ,
-                                villager.rotationYaw,
-                                villager.rotationPitch);
+                            villager.posX,
+                            villager.posY,
+                            villager.posZ,
+                            villager.rotationYaw,
+                            villager.rotationPitch);
                         zombie.renderYawOffset = villager.renderYawOffset;
                         zombie.setHealth(villager.getHealth());
                         zombie.setVillager(true);
@@ -114,11 +115,11 @@ public class BlockWitchWater extends BlockFluidClassic {
                 spider.setDead();
                 EntityCaveSpider caveSpider = new EntityCaveSpider(world);
                 caveSpider.setLocationAndAngles(
-                        spider.posX,
-                        spider.posY,
-                        spider.posZ,
-                        spider.rotationYaw,
-                        spider.rotationPitch);
+                    spider.posX,
+                    spider.posY,
+                    spider.posZ,
+                    spider.rotationYaw,
+                    spider.rotationPitch);
                 caveSpider.renderYawOffset = spider.renderYawOffset;
                 caveSpider.setHealth(caveSpider.getMaxHealth());
                 world.spawnEntityInWorld(caveSpider);
@@ -127,11 +128,11 @@ public class BlockWitchWater extends BlockFluidClassic {
                 squid.setDead();
                 EntityGhast ghast = new EntityGhast(world);
                 ghast.setLocationAndAngles(
-                        squid.posX,
-                        squid.posY + 2.0D,
-                        squid.posZ,
-                        squid.rotationYaw,
-                        squid.rotationPitch);
+                    squid.posX,
+                    squid.posY + 2.0D,
+                    squid.posZ,
+                    squid.rotationYaw,
+                    squid.rotationPitch);
                 ghast.renderYawOffset = squid.renderYawOffset;
                 ghast.setHealth(ghast.getMaxHealth());
                 world.spawnEntityInWorld(ghast);

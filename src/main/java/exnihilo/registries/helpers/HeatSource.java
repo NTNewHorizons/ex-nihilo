@@ -30,7 +30,7 @@ public class HeatSource {
         if (!other.canEqual(this)) return false;
         Object this$block = this.block, other$block = other.block;
         return (Objects.equals(this$block, other$block))
-                && (this.meta == other.meta && (Float.compare(this.value, other.value) == 0));
+            && (this.meta == other.meta && (Float.compare(this.value, other.value) == 0));
     }
 
     public HeatSource(Block block, int meta, float value) {

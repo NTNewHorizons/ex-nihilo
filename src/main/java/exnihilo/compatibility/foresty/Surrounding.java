@@ -13,13 +13,13 @@ import forestry.api.apiculture.FlowerManager;
 public class Surrounding {
 
     private static final EnumSet<FlowerType> addedFlowerTypes = EnumSet.of(
-            FlowerType.Normal,
-            FlowerType.Nether,
-            FlowerType.End,
-            FlowerType.Jungle,
-            FlowerType.Mushroom,
-            FlowerType.Cactus,
-            FlowerType.Gourd);
+        FlowerType.Normal,
+        FlowerType.Nether,
+        FlowerType.End,
+        FlowerType.Jungle,
+        FlowerType.Mushroom,
+        FlowerType.Cactus,
+        FlowerType.Gourd);
 
     public final Map<String, Integer> blocks = new HashMap<>();
 

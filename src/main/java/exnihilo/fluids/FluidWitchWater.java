@@ -12,6 +12,7 @@ public class FluidWitchWater extends Fluid {
 
     @Override
     public int getColor() {
-        return ColorRegistry.color("witchwater").toInt();
+        return ColorRegistry.color("witchwater")
+            .toInt();
     }
 }

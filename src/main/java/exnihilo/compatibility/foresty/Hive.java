@@ -50,14 +50,13 @@ public class Hive {
 
     public boolean areAllRequirementsMet(BiomeGenBase biome, Surrounding local, boolean canSeeSky, int height) {
         if ((this.requiredBiome != null && biome.biomeID != this.requiredBiome.biomeID)
-                || (this.minTemperature != null && biome.temperature < this.minTemperature)
-                || (this.maxTemperature != null && biome.temperature > this.maxTemperature)
-                || (this.minRainfall != null && biome.rainfall < this.minRainfall)
-                || (this.maxRainfall != null && biome.rainfall > this.maxRainfall)
-                || (this.minYLevel != null && height < this.minYLevel)
-                || (this.maxYLevel != null && height > this.maxYLevel)
-                || (this.requiredCanSeeSky != null && canSeeSky != this.requiredCanSeeSky))
-            return false;
+            || (this.minTemperature != null && biome.temperature < this.minTemperature)
+            || (this.maxTemperature != null && biome.temperature > this.maxTemperature)
+            || (this.minRainfall != null && biome.rainfall < this.minRainfall)
+            || (this.maxRainfall != null && biome.rainfall > this.maxRainfall)
+            || (this.minYLevel != null && height < this.minYLevel)
+            || (this.maxYLevel != null && height > this.maxYLevel)
+            || (this.requiredCanSeeSky != null && canSeeSky != this.requiredCanSeeSky)) return false;
         if (this.requiresBlockAbove != null && !this.requiresBlockAbove.equals(local.blockAbove)) return false;
         if (this.requiresTree != null && this.requiresTree && local.leafCount < 20) return false;
         if (this.requiredSubstrate != null) {

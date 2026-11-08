@@ -1,11 +1,9 @@
 package exnihilo;
 
-import exnihilo.api.items.IMesh;
-import exnihilo.items.meshes.*;
-import exnihilo.registries.MeshRegistry;
 import net.minecraft.item.Item;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import exnihilo.api.items.IMesh;
 import exnihilo.items.ItemGrassSeeds;
 import exnihilo.items.ItemPorcelainBall;
 import exnihilo.items.ItemSilkworm;
@@ -19,6 +17,11 @@ import exnihilo.items.dolls.ItemDollAngry;
 import exnihilo.items.dolls.ItemDollCreepy;
 import exnihilo.items.hammers.HammerType;
 import exnihilo.items.hammers.ItemHammer;
+import exnihilo.items.meshes.DiamondMesh;
+import exnihilo.items.meshes.FlintMesh;
+import exnihilo.items.meshes.IronMesh;
+import exnihilo.items.meshes.ItemMesh;
+import exnihilo.items.meshes.SilkMesh;
 import exnihilo.items.seeds.ItemSeedAcacia;
 import exnihilo.items.seeds.ItemSeedBirch;
 import exnihilo.items.seeds.ItemSeedCactus;
@@ -29,6 +32,7 @@ import exnihilo.items.seeds.ItemSeedPotato;
 import exnihilo.items.seeds.ItemSeedRubber;
 import exnihilo.items.seeds.ItemSeedSpruce;
 import exnihilo.items.seeds.ItemSeedSugarcane;
+import exnihilo.registries.MeshRegistry;
 
 public class ENItems {
 
@@ -175,7 +179,8 @@ public class ENItems {
         GameRegistry.registerItem(SeedsPotato, "seed_potato");
         SeedsRubber = new ItemSeedRubber();
         GameRegistry.registerItem(SeedsRubber, "seed_rubber");
-        IceShard = (new Item()).setUnlocalizedName("ice_shard").setTextureName("exnihilo:IceShard");
+        IceShard = (new Item()).setUnlocalizedName("ice_shard")
+            .setTextureName("exnihilo:IceShard");
         GameRegistry.registerItem(IceShard, "ice_shard");
     }
 }

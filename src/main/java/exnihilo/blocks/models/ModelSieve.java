@@ -25,12 +25,12 @@ public class ModelSieve extends ModelBase {
     final ModelRenderer BoxSide4;
 
     public static final ResourceLocation[] textures = new ResourceLocation[] {
-            new ResourceLocation("exnihilo", "textures/blocks/ModelSieveOak.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelSieveSpruce.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelSieveBirch.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelSieveJungle.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelSieveAcacia.png"),
-            new ResourceLocation("exnihilo", "textures/blocks/ModelSieveDarkOak.png") };
+        new ResourceLocation("exnihilo", "textures/blocks/ModelSieveOak.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelSieveSpruce.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelSieveBirch.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelSieveJungle.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelSieveAcacia.png"),
+        new ResourceLocation("exnihilo", "textures/blocks/ModelSieveDarkOak.png") };
 
     public ResourceLocation getSieveTexture(Block block, int meta) {
         return textures[meta];
