@@ -1,0 +1,21 @@
+{
+  "modListVersion": 2,
+  "modList": [{
+    "modid": "${modId}",
+    "name": "${modName}",
+    "description": "Fork of Ex-Nihilo for Minecraft 1.7.10 with re-worked sieves, crooks, and configs.",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
+    "url": "https://github.com/NTNewHorizons/ex-nihilo",
+    "updateUrl": "",
+    "authorList": ["NTNewHorizons"],
+    "credits": "Original Ex-Nihilo by RedRockFowl; decompiled 1.38-53",
+    "logoFile": "",
+    "screenshots": [],
+    "parent": "",
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "useDependencyInformation": false
+  }]
+}
