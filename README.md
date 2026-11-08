@@ -21,14 +21,14 @@ NTNH releases are published to the [NTNH Maven repository](https://maven.ntnewho
 ```groovy
 repositories {
     maven {
-        name = "NTNH Releases"
-        url = "https://maven.ntnewhorizons.com/releases/"
-    }
+		name = "ntnewhorizonsMavenReleases"
+		url = uri("https://maven.ntnewhorizons.com/releases")
+	}
 }
 
 dependencies {
-    def exNihiloVersion = "1.41_NTNH" // Change this value according to the release you wish to use
-    implementation "exnihilo:ExNihilo:${exNihiloVersion}:dev"
-    compileOnly "exnihilo:ExNihilo:${exNihiloVersion}:sources"
+    implementation("exnihilo:ExNihilo:1.42_NTNH:dev")
 }
 ```
+
+The published Maven version matches the pushed release tag.
